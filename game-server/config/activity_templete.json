@@ -193,6 +193,7 @@
         "multi_gacha_cost":150,
         "single_gacha_unit":"G",
         "multi_gacha_unit":"G",
+        "total_card":10,
         "single_count":1,
         "combo_count":12,
         "gacha_random_num":1,
