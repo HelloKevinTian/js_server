@@ -153,9 +153,12 @@ http_connectors.prototype.dispatchMessage = function(data,url,req,res){
         }else if("1.0.0" == msg.version || "0.9.0" == msg.version){
             //  version mapping for wandoujia
             msg.version = "2.2.0";
-        }else if("1.0.1" == msg.version){
+        }else if("1.0.1" == msg.version ){
             //  version mapping for wandoujia
             msg.version = "2.2.1";
+        }else if("1.0.2" == msg.version ){
+            //  version mapping for wandoujia
+            msg.version = "2.2.2";
         }
     }
     var statistics_wrapper = pomelo.app.get('statistics_wrapper');
