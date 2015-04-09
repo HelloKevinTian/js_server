@@ -3,7 +3,7 @@
         "type": "1",
         "switch":"1",
         "startTime": "2014/10/21",
-        "endTime": "2014/12/30",
+        "endTime": "2015/12/30",
         "signDays": "20",
         "awardCoin": "10000",
         "desc": "每日签到,双倍好礼"
@@ -188,7 +188,7 @@
         "type": "8",
         "switch": "1",
         "startTime": "2015/3/1",
-        "endTime": "2015/6/30",
+        "endTime": "2015/12/30",
         "single_gacha_cost":15,
         "multi_gacha_cost":150,
         "single_gacha_unit":"G",
