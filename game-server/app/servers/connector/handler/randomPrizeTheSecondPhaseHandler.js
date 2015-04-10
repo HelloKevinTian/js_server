@@ -41,35 +41,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
             if(1 == free_flag && single_gacha == "true" ){
                 free_flag = 0;
             }
-            if(version === "1.0.0" || version === "1.0.1" || version === "2.2.0"){
-                for(var i = 0; i < count; ++i){
-                    var gacha_array = new Array();
-                    for(var j = 0; j < activity.gacha_random_num; ++j){
-                        var prize = random_prize_the_second_phase_wrapper.random();
-                        if(!prize){
-                            continue;
-                        }
-                        gacha_array.push(prize);
-                    }
-                    for(var j = 0; j < activity.gacha2_random_num; ++j){
-                        var prize = random_prize_the_second_phase_wrapper.random2();
-                        if(!prize){
-                            continue;
-                        }
-                        gacha_array.push(prize);
-                    }
-                    gacha_result.push(gacha_array);
-                }
-                random_prize_the_second_phase_wrapper.set(device_guid,free_flag);
-                next(null, {
-                    code: 0,
-                    msg_id : msg.msg_id,
-                    flowid : msg.flowid,
-                    time:Math.floor(Date.now()/1000),
-                    gacha_result : gacha_result,
-                    use_ticket : msg.use_ticket
-                });
-            }else{
+            if(version === "1.0.2"){
                 specialPrizeFlag.get(device_guid,function(replyData){
                     if(null != replyData){
                         count_index = JSON.parse(replyData)
@@ -130,6 +102,34 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
                         gacha_result : gacha_result,
                         use_ticket : msg.use_ticket == "true" ? "1": "0"
                     });
+                });
+            }else{
+                for(var i = 0; i < count; ++i){
+                    var gacha_array = new Array();
+                    for(var j = 0; j < activity.gacha_random_num; ++j){
+                        var prize = random_prize_the_second_phase_wrapper.random();
+                        if(!prize){
+                            continue;
+                        }
+                        gacha_array.push(prize);
+                    }
+                    for(var j = 0; j < activity.gacha2_random_num; ++j){
+                        var prize = random_prize_the_second_phase_wrapper.random2();
+                        if(!prize){
+                            continue;
+                        }
+                        gacha_array.push(prize);
+                    }
+                    gacha_result.push(gacha_array);
+                }
+                random_prize_the_second_phase_wrapper.set(device_guid,free_flag);
+                next(null, {
+                    code: 0,
+                    msg_id : msg.msg_id,
+                    flowid : msg.flowid,
+                    time:Math.floor(Date.now()/1000),
+                    gacha_result : gacha_result,
+                    use_ticket : msg.use_ticket
                 });
             }
         });
