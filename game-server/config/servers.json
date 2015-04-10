@@ -1,12 +1,12 @@
 {
   "development":{
     "connector": [
-    {"id": "connector-server-1", "host": "127.0.0.1", "port": 13150, "clientPort": 13010, "httpClientPort" : 20000, "frontend": true, "cluster":0, "args": "--debug=20888"}
+    {"id": "connector-server-1", "host": "127.0.0.1", "port": 13150, "clientPort": 13010, "httpClientPort" : 20100, "frontend": true, "cluster":0, "args": "--debug=20888"}
     ]
   },
   "production":{
     "connector": [
-    {"id": "connector-server-1", "host": "127.0.0.1", "port": 13150, "clientPort": 13010, "httpClientPort" : 20000,"frontend": true, "cluster":1}
+    {"id": "connector-server-1", "host": "127.0.0.1", "port": 13150, "clientPort": 13010, "httpClientPort" : 20100,"frontend": true, "cluster":1}
     ]
   }
 }
