@@ -2,7 +2,7 @@
  * Created by King Lee on 2014/8/13.
  */
 var http = require("http");
-var qs = require( 'querystring' );
+var qs = require('querystring');
 var handlerMgr = require('../servers/connector/handlerMgr');
 var session = require('../util/session');
 var pomelo = require('pomelo');
@@ -21,7 +21,7 @@ var DEFAULT_PORT = 20000;
 var http_connectors = function(app, opts) {
     this.app = app;
     this.server = null;
-    this.port = opts.port ;
+    this.port = opts.port;
     this.host = opts.host;
     this.cluster = opts.cluster;
     //  a temp variable
@@ -32,7 +32,7 @@ http_connectors.name = '__http_connectors__';
 
 http_connectors.prototype.start = function(cb) {
     var cpu_num = require('os').cpus().length;
-    if(this.cluster){
+    if (this.cluster) {
         if (cluster.isMaster) {
             // Fork workers.
             for (var i = 0; i < cpu_num; i++) {
@@ -42,45 +42,47 @@ http_connectors.prototype.start = function(cb) {
             cluster.on('exit', function(worker, code, signal) {
                 http_logger.debug('worker ' + worker.process.pid + ' died');
             });
-        }
-        else{
+        } else {
             this.startHttpServer(cb);
         }
-    }else{
+    } else {
         this.startHttpServer(cb);
     }
 };
 
-http_connectors.prototype.startHttpServer = function(cb){
+http_connectors.prototype.startHttpServer = function(cb) {
     var self = this;
     this.server = http.createServer(function(req, res) {
         var url = req.url;
         var client_ip = req.connection.remoteAddress;
         http_logger.debug("new client coming ip:" + client_ip + " method:" + req.method + " url:" + url);
-        switch(req.method){
-            case 'GET':{
-                var args = self.parseGet(req, res);
-                args && self.dispatchMessage(args[1], args[0], req, res);
-                break;
-            }
-            case 'POST':{
-                self.parsePost(req,res,function(data){
-                    self.dispatchMessage(data,url,req,res);
-                });
-                break;
-            }
-            default:{
-                res.end();
-                break;
-            }
+        switch (req.method) {
+            case 'GET':
+                {
+                    var args = self.parseGet(req, res);
+                    args && self.dispatchMessage(args[1], args[0], req, res);
+                    break;
+                }
+            case 'POST':
+                {
+                    self.parsePost(req, res, function(data) {
+                        self.dispatchMessage(data, url, req, res);
+                    });
+                    break;
+                }
+            default:
+                {
+                    res.end();
+                    break;
+                }
         }
     });
-    this.server.listen( this.port );
+    this.server.listen(this.port);
     http_logger.debug("server listen at " + this.port + " as a component!");
     process.nextTick(cb);
 };
 
-http_connectors.prototype.afterStart = function (cb) {
+http_connectors.prototype.afterStart = function(cb) {
     console.log('http connectors after start');
     process.nextTick(cb);
 };
@@ -96,11 +98,11 @@ http_connectors.prototype.stop = function(force, cb) {
  * @param res
  * @returns {*}
  */
-http_connectors.prototype.parseGet = function(req, res){
+http_connectors.prototype.parseGet = function(req, res) {
     var str = req.url;
     if (str.indexOf('?') > -1) {
         var arr = String.prototype.split.call(req.url, '?');
-        return [arr[0],qs.parse(arr[1])];
+        return [arr[0], qs.parse(arr[1])];
     } else {
         return [str, null];
     }
@@ -112,7 +114,7 @@ http_connectors.prototype.parseGet = function(req, res){
  * @param res
  * @param cb
  */
-http_connectors.prototype.parsePost = function(req,res,cb){
+http_connectors.prototype.parsePost = function(req, res, cb) {
     var chunks = [];
     req.on('data', function(chunk) {
         chunks.push(chunk);
@@ -124,39 +126,38 @@ http_connectors.prototype.parsePost = function(req,res,cb){
         //  convert url format to normal!!
         cb(qs.parse(data));
     });
-    req.on('error',function(err){
+    req.on('error', function(err) {
         http_logger.debug('problem with request: ' + err.message);
     });
 };
 
-http_connectors.prototype.dispatchMessage = function(data,url,req,res){
-    if(url == "/test")
-    {
+http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
+    if (url == "/test") {
         //  date for test
         data = qs.parse('msg={"context": "context", "msg_id": 2}&account=king_lee');
-    }
-    else if(url == "/status")
-    {
-        var result = {code :200,status:"ok"}
+    } else if (url == "/status") {
+        var result = {
+            code: 200,
+            status: "ok"
+        }
         res.end(JSON.stringify(result) + '\n', 'utf8');
         return;
-    }else if(url == "/favicon.ico")
-    {
+    } else if (url == "/favicon.ico") {
         //  do nothing
         return;
     }
     var msg = JSON.parse(data.msg);
     //  version mapping
-    if(msg.version){
-        if("1.2.9" == msg.version){
+    if (msg.version) {
+        if ("1.2.9" == msg.version) {
             msg.version = "1.2.8";
-        }else if("1.0.0" == msg.version || "0.9.0" == msg.version){
+        } else if ("1.0.0" == msg.version || "0.9.0" == msg.version) {
             //  version mapping for wandoujia
             msg.version = "2.2.0";
-        }else if("1.0.1" == msg.version ){
+        } else if ("1.0.1" == msg.version) {
             //  version mapping for wandoujia
             msg.version = "2.2.1";
-        }else if("1.0.2" == msg.version ){
+        } else if ("1.0.2" == msg.version) {
             //  version mapping for wandoujia
             msg.version = "2.2.2";
         }
@@ -167,19 +168,18 @@ http_connectors.prototype.dispatchMessage = function(data,url,req,res){
     statistics_wrapper.requestsPerHourInc();
     statistics_wrapper.requestsPerMinuteInc();
     statistics_wrapper.statistics_device(msg.deviceid);
-    http_logger.debug("before dispatchMessage ... %j", msg);
-    handlerMgr.trigger(msg.msg_id,msg,this.session,function(error,res_msg){
-        http_logger.debug("after dispatchMessage ... %j", res_msg);
-        if(0){
+    http_logger.debug("C2S: %j", msg);
+    handlerMgr.trigger(msg.msg_id, msg, this.session, function(error, res_msg) {
+        http_logger.debug("S2C: %j", res_msg);
+        if (0) {
             //  by default the encoding is 'utf8'.
             res.write(JSON.stringify(res_msg));
             res.end();
-        }
-        else{
+        } else {
             //  res.end:Finishes sending the request. If any parts of the body are unsent, it will flush them to the stream.
             //  If the request is chunked, this will send the terminating '0\r\n\r\n'.
             //  If data is specified, it is equivalent to calling request.write(data, encoding) followed by request.end().
-            res.end( JSON.stringify(res_msg));
+            res.end(JSON.stringify(res_msg));
         }
     });
 };
