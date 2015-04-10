@@ -2,7 +2,6 @@
 	{"id":1,"type":"ITEM","number":1,"data":"4","rate":200,"icon":"X"},
 	{"id":2,"type":"ITEM","number":1,"data":"5","rate":750,"icon":"Y"},
 	{"id":3,"type":"ITEM","number":1,"data":"6","rate":750,"icon":"Z"},
-	{"id":4,"type":"F1TICKET","number":1,"data":"41","rate":1800,"icon":"T","replace":"COIN","replace_number":10000,"replace_icon":"C"},
 	{"id":18,"type":"GEM","number":1,"data":"","rate":200,"icon":"G"},
 	{"id":19,"type":"GEM","number":2,"data":"","rate":50,"icon":"G"},
 	{"id":20,"type":"GEM","number":5,"data":"","rate":20,"icon":"G"},

@@ -5,13 +5,16 @@ var redis_random_prize_the_second_phase_wrapper = require('../nosql/redis_random
 var gacha_the_second_phase_json = require('../../config/gacha_the_second_phase.json');
 var gacha_the_second_phase_json_2 = require('../../config/gacha_the_second_phase_2.json');
 var gacha_the_second_phase_json_3 = require('../../config/gacha_the_second_phase_3.json');
+var gacha_the_second_phase_json_4 = require('../../config/gacha_the_second_phase_4.json');
 var random_prize_the_second_phase_wrapper = function() {
     this.wight_total = 0;
     this.wight_total2 = 0;
     this.wight_total3 = 0;
+    this.wight_total4 = 0;
     this.wight_array = [];
     this.wight_array2 = [];
     this.wight_array3 = [];
+    this.wight_array4 = [];
     this.init();
     if(0){
         this.test();
@@ -33,6 +36,11 @@ random_prize_the_second_phase_wrapper.prototype.init = function(){
         var wight_total_backup3 = this.wight_total3;
         this.wight_total3 += gacha_the_second_phase_json_3[i].rate;
         this.wight_array3.push({"id":gacha_the_second_phase_json_3[i].id,"range":[wight_total_backup3,this.wight_total3]});
+    }
+    for(var i = 0; i < gacha_the_second_phase_json_4.length; ++i){
+        var wight_total_backup4 = this.wight_total4;
+        this.wight_total4 += gacha_the_second_phase_json_4[i].rate;
+        this.wight_array4.push({"id":gacha_the_second_phase_json_4[i].id,"range":[wight_total_backup4,this.wight_total4]});
     }
 }
 
@@ -82,6 +90,23 @@ random_prize_the_second_phase_wrapper.prototype.random3 = function(){
     for(var j = 0; j < gacha_the_second_phase_json_3.length; ++j){
         if(j == index){
             return gacha_the_second_phase_json_3[j];
+        }
+    }
+    return null;
+};
+
+random_prize_the_second_phase_wrapper.prototype.random4 = function(){
+    var random_value = Math.floor(Math.random()*this.wight_total4);
+    var index = 0;
+    for(var i = 0; i < this.wight_array4.length; ++i){
+        if(random_value >= this.wight_array4[i].range[0] && random_value < this.wight_array4[i].range[1]){
+            index = i;
+            break;
+        }
+    }
+    for(var j = 0; j < gacha_the_second_phase_json_4.length; ++j){
+        if(j == index){
+            return gacha_the_second_phase_json_4[j];
         }
     }
     return null;

@@ -101,7 +101,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
                                 count_index++;
                             }
                             for(var j = 0; j < activity.gacha_random_num; ++j){
-                                var prize = random_prize_the_second_phase_wrapper.random();
+                                var prize = random_prize_the_second_phase_wrapper.random4();
                                 if(!prize){
                                     continue;
                                 }
