@@ -41,7 +41,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
             if(1 == free_flag && single_gacha == "true" ){
                 free_flag = 0;
             }
-            if(version === "1.0.2"){
+            if(version === "1.0.2" || version === "2.2.2"){
                 specialPrizeFlag.get(device_guid,function(replyData){
                     if(null != replyData){
                         count_index = JSON.parse(replyData)
