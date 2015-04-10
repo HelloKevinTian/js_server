@@ -41,7 +41,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
             if(1 == free_flag && single_gacha == "true" ){
                 free_flag = 0;
             }
-            if(version === "1.0.0" || version === "1.0.1"){
+            if(version === "1.0.0" || version === "1.0.1" || version === "2.2.0"){
                 for(var i = 0; i < count; ++i){
                     var gacha_array = new Array();
                     for(var j = 0; j < activity.gacha_random_num; ++j){
