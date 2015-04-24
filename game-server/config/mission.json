@@ -1037,7 +1037,7 @@
 },
 {
 	"id": 62,
-	"desc": "[限时任务]完成20个豌小豆的任务",
+	"desc": "[限时任务]完成20个粉红猫的任务",
 	"mission_type": "WEEKLY",
 	"condition_type": "CLEAR_ALL_MISSION",
 	"used_car_id": 0,
