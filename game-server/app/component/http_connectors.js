@@ -125,15 +125,19 @@ http_connectors.prototype.dispatchMessage = function(data,url,req,res){
     {
         //  date for test
         data = qs.parse('msg={"context": "context", "msg_id": 2}&account=king_lee');
+    } else if (url === "/status") {
+        var result = {code :200,status:"ok"}
+        res.end(JSON.stringify(result) + '\n', 'utf8');
+        return;
     }
     var msg = JSON.parse(data.msg);
     var token = data.token;
     //  version mapping
-    if(msg.version){
-        if("1.2.9" == msg.version || "1.3.0" == msg.version){
-            msg.version = "1.2.8";
-        }
-    }
+    // if(msg.version){
+    //     if("1.2.9" == msg.version || "1.3.0" == msg.version){
+    //         msg.version = "1.2.8";
+    //     }
+    // }
     var statistics_wrapper = pomelo.app.get('statistics_wrapper');
     statistics_wrapper.requestsInAllInc();
     statistics_wrapper.requestsPerDayInc();
