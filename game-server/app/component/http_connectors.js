@@ -2,6 +2,7 @@
  * Created by King Lee on 2014/8/13.
  */
 var http = require("http");
+var fs = require('fs');
 var qs = require('querystring');
 var handlerMgr = require('../servers/connector/handlerMgr');
 var session = require('../util/session');
@@ -142,11 +143,14 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         }
         res.end(JSON.stringify(result) + '\n', 'utf8');
         return;
-    } else if (url == "/favicon.ico") {
-        //  do nothing
+    } else if (url == "/gv_gameicon") {
+        var img = fs.readFileSync('./gv_gameicon.png');
+        res.writeHead(200, {'Content-Type': 'image/png' });
+        res.end(img, 'binary');
         return;
     } else if (url == "/pay_callback"){
         res.end("success",'utf-8');
+        return;
     }
     var msg = JSON.parse(data.msg);
     //  version mapping
