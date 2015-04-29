@@ -7,6 +7,11 @@ var pomelo = require('pomelo');
 var util = require('../../../util/util');
 var rival_vs_title_json = require('../../../../config/rival_vs_title');
 
+var log4js = require('log4js');
+var log_json = require('../../../../config/log.json');
+log4js.configure(log_json);
+var datelogger = log4js.getLogger('date_logger');
+
 handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, session, next) {
     var channel = msg.channel;
     var version = msg.version;
@@ -29,6 +34,8 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
         }
         var maintaining_msg = rank_pvp_wrapper.maintaining_msg();
         rank_pvp_wrapper.get_rank_info(device_guid,device_emui,function(rank_info){
+            datelogger.debug("##111 msg24: " + JSON.stringify(msg));
+            datelogger.debug("##222 old rank: " + JSON.stringify(rank_info));
             if(rank_info){
                 rank_info = JSON.parse(rank_info);
             }
@@ -96,6 +103,8 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
             if("true" == msg.win_flag){
                 rank_info.total_win += 1;
             }
+            // log pvp rank
+            datelogger.debug("##333 new rank: " + JSON.stringify(rank_info));
             //  save it
             rank_pvp_wrapper.set_rank_info(channel,device_guid,rank_info,function(reply){});
             //  update score/score weekly rank

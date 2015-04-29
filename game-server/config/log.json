@@ -35,7 +35,14 @@
       "maxLogSize": 204800,
       "backups": 3,
       "category": "absolute-logger"          
-    }
+    },
+    {
+      "type": "dateFile",
+      "filename": "./logs/date_log_pvp_rank.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": false,
+      "category":"date_logger"
+  }
   ],
   "levels": {
 	"http-logger" : "ERROR",
