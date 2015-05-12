@@ -199,7 +199,14 @@
         "gacha_random_num":1,
         "gacha2_random_num":9,
         "ad_url":"",
-        "desc":"抽奖2期-车神宝箱"
+        "desc":"抽奖2期-车神宝箱",
+        "entity_startTime":"2015/3/1",
+        "entity_endTime":"2015/4/1",
+        "entity_unit_type":[5,6,7],
+        "entity_unit_time":[10,11,15],
+        "entity_unit_num":[3,4,2],
+        "entity_total_num":[10,10,10],
+        "entity_json_item_weight":[0.01,0.1,0.2]
     },
     "9": {
         "type": "9",

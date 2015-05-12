@@ -40,7 +40,39 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
             if (1 == free_flag && single_gacha == "true") {
                 free_flag = 0;
             }
-            if (version === "1.0.2" || version === "2.2.2") {
+
+            //1.0.3版本加入实物抽奖
+            if (version === "1.0.3" || version === "2.2.3") {
+                var entity_startTime = activity.entity_startTime;
+                var entity_endTime = activity.entity_endTime;
+                var entity_unit_type = activity.entity_unit_type;
+                var entity_unit_time = activity.entity_unit_time;
+                var entity_unit_num = activity.entity_unit_num;
+                var entity_total_num = activity.entity_total_num;
+                var entity_json_item_weight = activity.entity_json_item_weight;
+
+                var entity_startTime_date = new Date(entity_startTime);
+                var entity_startTime_stamp = entity_startTime_date.getTime();
+
+                var entity_endTime_date = new Date(entity_endTime);
+                var entity_endTime_stamp = entity_endTime_date.getTime();
+
+                var now_date = new Date();
+                var now_stamp = now_date.getTime();
+
+                //是否在活动时间内
+                //抽中，存玩家guid，item_type
+                //设置手机号时  更新redis   phone_num_item_type
+                //跑马取数据时 hvals  arr.reverse()
+
+                for (var i = 0;i < entity_unit_type.Length;i++) {
+                    //todo
+                }
+
+
+
+
+            } else if (version === "1.0.2" || version === "2.2.2") {
                 specialPrizeFlag.get(device_guid, function(replyData) {
                     if (null != replyData) {
                         count_index = JSON.parse(replyData)
