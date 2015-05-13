@@ -160,6 +160,8 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         } else if ("1.0.2" == msg.version) {
             //  version mapping for wandoujia
             msg.version = "2.2.2";
+        } else if ("1.0.3" == msg.version) {
+            msg.version = "2.2.3";
         }
     }
     var statistics_wrapper = pomelo.app.get('statistics_wrapper');

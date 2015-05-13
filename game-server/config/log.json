@@ -28,6 +28,13 @@
       "maxLogSize": 204800,
       "backups": 10,
       "category": "absolute-logger"          
+    },
+    {
+      "type": "dateFile",
+      "filename": "./logs/gacha_date_log.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": false,
+      "category": "date_logger"
     }
   ],
   "levels": {

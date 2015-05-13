@@ -5,13 +5,13 @@
  */
 
 var redis_pools = require("../nosql/redis_pools");
-var z_entity_gacha_winner = 'z_entity_gacha_winner';
+var h_entity_gacha_winner = 'h_entity_gacha_winner';
 
 var entity_gacha_winner = module.exports;
 
-entity_gacha_winner.set = function(device_guid, value) {
+entity_gacha_winner.set = function(key, value) {
     redis_pools.execute('pool_1', function(client, release) {
-        client.hset(h_entity_gacha_winner, device_guid, value, function(err, reply) {
+        client.hset(h_entity_gacha_winner, key, value, function(err, reply) {
             if (err) {
                 //  some thing log
                 console.error(err);
@@ -31,9 +31,9 @@ entity_gacha_winner.set = function(device_guid, value) {
     // });
 };
 
-entity_gacha_winner.get = function(device_guid, cb) {
+entity_gacha_winner.get = function(key, cb) {
     redis_pools.execute('pool_1', function(client, release) {
-        client.hget(h_entity_gacha_winner, device_guid, function(err, reply) {
+        client.hget(h_entity_gacha_winner, key, function(err, reply) {
             if (err) {
                 //  some thing log
                 console.error(err);
@@ -60,6 +60,19 @@ entity_gacha_winner.get = function(device_guid, cb) {
     //         release();
     //     });
     // })
+};
+
+entity_gacha_winner.get_keys = function(cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hkeys(h_entity_gacha_winner, function(err, reply) {
+            if (err) {
+                //  some thing log
+                console.error(err);
+            }
+            cb(reply);
+            release();
+        });
+    });
 };
 
 entity_gacha_winner.get_vals = function(cb) {
