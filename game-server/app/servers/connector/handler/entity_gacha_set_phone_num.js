@@ -34,7 +34,6 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_SET_PHONE_NUM, function(msg
                             result = 0;
                             entity_gacha_winner.set(players[count], phone_num.toString() + "_" + ret);
                         }
-                        datelogger.debug("@result: " + result.toString() + "@phone_num: " + phone_num.toString() + "@key:  " + players[count]);
                         count++;
                         callback();
                     });
@@ -47,6 +46,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_SET_PHONE_NUM, function(msg
                 if (err) {
                     console.error(err);
                 }
+                datelogger.debug("@result: " + result.toString() + "@phone_num: " + phone_num.toString() + "@guid:  " + device_guid.toString());
                 next(null, {
                     code: 0,
                     msg_id: msg.msg_id,
