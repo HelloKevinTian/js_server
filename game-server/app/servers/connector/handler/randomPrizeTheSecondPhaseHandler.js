@@ -236,6 +236,9 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
                     var day = now_date.getDate();
                     var date_str = year.toString() + "/" + month.toString() + "/" + day.toString();
 
+                    console.log(device_guid);
+                    console.log(now_date);
+                    console.log(item_type);
                     entity_gacha_winner.set(device_guid.toString() + "_" + now_date.toString(),item_type.toString() + "_" + date_str);     //哪个人抽到哪个奖品存库
                     //log
                     datelogger.debug("winner get prize! :" + device_guid.toString() + "@" + now_date.toString() + "@" + item_type.toString());
