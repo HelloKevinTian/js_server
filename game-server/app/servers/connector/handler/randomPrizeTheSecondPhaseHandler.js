@@ -215,7 +215,7 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
                 used_prize_num = gacha_info[item_type_str];
             }
 
-            var n = Math.ceil((now_stamp - entity_startTime_stamp) / unit_time); //已过n个单位时间
+            var n = Math.ceil((now_stamp - entity_startTime_stamp) / (unit_time * 3600)); //已过n个单位时间
             var all_prize_num = n * unit_num; //理论产出值
             if (all_prize_num >= total_num) {
                 all_prize_num = total_num;
