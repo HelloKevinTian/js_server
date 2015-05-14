@@ -211,11 +211,11 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
 
             var used_prize_num = 0; //已抽中的数量
             if (gacha_info != null) {
-                var item_type_str = item_type.toString();
-                used_prize_num = gacha_info[item_type_str];
+                var item_type_str = entity_startTime + "@" + item_type.toString();
+                used_prize_num = (gacha_info[item_type_str] === undefined) ? 0 : gacha_info[item_type_str];
             }
 
-            var n = Math.ceil((now_stamp - entity_startTime_stamp) / (unit_time * 3600)); //已过n个单位时间
+            var n = Math.ceil((now_stamp - entity_startTime_stamp) / (unit_time * 3600 * 1000)); //已过n个单位时间
             var all_prize_num = n * unit_num; //理论产出值
             if (all_prize_num >= total_num) {
                 all_prize_num = total_num;
@@ -229,16 +229,14 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
                 if (random_val < get_weight) {
                     //抽中了！！！
                     entity_prize_win_flag = true;
-                    entity_gacha_info.set(item_type,++used_prize_num);  //更新redis，此奖品已被抽中的次数存库
+                    entity_gacha_info.set(entity_startTime + "@" + item_type.toString(),++used_prize_num);  //更新redis，此奖品已被抽中的次数存库
 
                     var year = now_date.getFullYear();
                     var month = now_date.getMonth() + 1;
                     var day = now_date.getDate();
                     var date_str = year.toString() + "/" + month.toString() + "/" + day.toString();
 
-                    console.log(device_guid);
-                    console.log(now_date);
-                    console.log(item_type);
+                    console.log(device_guid,now_date,item_type);
                     entity_gacha_winner.set(device_guid.toString() + "_" + now_date.toString(),item_type.toString() + "_" + date_str);     //哪个人抽到哪个奖品存库
                     //log
                     datelogger.debug("winner get prize! :" + device_guid.toString() + "@" + now_date.toString() + "@" + item_type.toString());
