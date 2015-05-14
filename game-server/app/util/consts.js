@@ -41,5 +41,12 @@ module.exports = {
     TYPE_RIVAL:{
         TYPE_RIVAL_GENERAL:0,
         TYPE_RIVAL_BOSS:1
+    },
+    TYPE_ENTITY_PRIZE:{
+        TYPE_PHONE_CHARGE:5,    //话费
+        TYPE_SHOPPING_CARD:6,   //购物卡
+        TYPE_CAR_MODEL:7,       //车模
+        TYPE_MOBILE:8,          //手机
+        TYPE_PAD:9              //平板
     }
 };

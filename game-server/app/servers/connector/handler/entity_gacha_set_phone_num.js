@@ -19,24 +19,28 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_SET_PHONE_NUM, function(msg
 
     entity_gacha_winner.get_keys(function(reply){
     	var players = reply.reverse();
-    	for (var i = 0; i < players.length; i++) {
-    		if (players[i].indexOf(device_guid.toString()) > -1) {
-    			entity_gacha_winner.get(players[i],function(reply1){
-    				var result = 1;
-    				if (reply1 != null && reply1.length < 10) {
+    	var result = 1;
+
+        for (var i = 0; i < players.length; i++) {
+            if (players[i].indexOf(device_guid.toString()) > -1) {
+                entity_gacha_winner.get(players[i],function(reply1){
+    				if (reply1 != null && reply1.length < 20) {
     					result = 0;
     					entity_gacha_winner.set(players[i],phone_num.toString() + "_" + reply1);
     				}
-    				datelogger.debug("result: " + result.toString() + "@" + "phone_num: " + phone_num.toString() + "@" + "key:  " + players[i]);
-    				next(null, {
-			            code: 0,
-			            msg_id: msg.msg_id,
-			            flowid: msg.flowid,
-			            time: Math.floor(Date.now() / 1000),
-			            result: result
-			        });
+    				datelogger.debug("@result: " + result.toString() + "@phone_num: " + phone_num.toString() + "@key:  " + players[i]);
+    				
     			});
     		};
     	};
+
+        next(null, {
+            code: 0,
+            msg_id: msg.msg_id,
+            flowid: msg.flowid,
+            time: Math.floor(Date.now() / 1000),
+            result: result
+        });
+
     });
 });

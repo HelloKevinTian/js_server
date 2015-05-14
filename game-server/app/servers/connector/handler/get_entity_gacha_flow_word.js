@@ -29,20 +29,24 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_FLOW_WORD, function(msg, se
 			var virtual_str = activity.virtual_flow_word;
 			var phone_num = [];
 			var prize = [];
+			var prize_time = [];
 			var phone_nums = reply.reverse();
 			var count = 0;
 			for (var i = 0; i < phone_nums.length; i++) {
-				if (phone_nums[i].length > 10 && count < 3) {
+				if (phone_nums[i].length > 20 && count < 3) {
+					var split_arr = phone_nums[i].split("_");
+
 					phone_num.push(phone_nums[i].substr(7,4));
-					if (phone_nums[i].substr(12) == "5") {
+					prize_time.push(split_arr[2]);
+					if (split_arr[1] == "5") {
 						prize.push("f");
-					} else if (phone_nums[i].substr(12) == "6") {
+					} else if (split_arr[1] == "6") {
 						prize.push("s");
-					} else if (phone_nums[i].substr(12) == "7") {
+					} else if (split_arr[1] == "7") {
 						prize.push("m");
-					} else if (phone_nums[i].substr(12) == "8") {
+					} else if (split_arr[1] == "8") {
 						prize.push("t");
-					} else if (phone_nums[i].substr(12) == "9") {
+					} else if (split_arr[1] == "9") {
 						prize.push("p");
 					}
 					count++;
@@ -58,6 +62,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_FLOW_WORD, function(msg, se
 	            time: Math.floor(Date.now() / 1000),
 	            result: phone_num,
 	            prize: prize,
+	            prize_time: prize_time,
 	            virtual_str: virtual_str
 	        });
 		});
