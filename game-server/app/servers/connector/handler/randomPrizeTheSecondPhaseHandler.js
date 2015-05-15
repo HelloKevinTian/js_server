@@ -12,7 +12,6 @@ var log4js = require("log4js");
 var datelogger = log4js.getLogger("date_logger");
 
 handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(msg, session, next) {
-    datelogger.debug("msg:  " + JSON.stringify(msg));
     var channel = msg.channel;
     var version = msg.version;
     var device_guid = msg.player_guid;
