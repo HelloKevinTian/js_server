@@ -34,7 +34,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_FLOW_WORD, function(msg, se
 			var count = 0;
 			for (var i = 0; i < phone_nums.length; i++) {
 				if (phone_nums[i].length > 20 && count < 3) {
-					var split_arr = phone_nums[i].split("_");
+					var split_arr = phone_nums[i].split("@");
 
 					phone_num.push(phone_nums[i].substr(7,4));
 					prize_time.push(split_arr[2]);
@@ -53,7 +53,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_FLOW_WORD, function(msg, se
 				}
 			};
 			for (var i = 0; i < phone_num.length; i++) {
-				datelogger.debug(phone_num[i] + "@" + virtual_str + "_" + i);
+				datelogger.debug("flow word " + phone_num[i] + " @ " + virtual_str + "@" + i);
 			};
 			next(null, {
 	            code: 0,
