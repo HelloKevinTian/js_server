@@ -32,7 +32,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_ENTITY_GACHA_SET_PHONE_NUM, function(msg
                     entity_gacha_winner.get(players[count], function(ret) {
                         if (ret != null && ret.length < 20) {
                             result = 0;
-                            entity_gacha_winner.set(players[count], phone_num.toString() + "_" + ret);
+                            entity_gacha_winner.set(players[count], phone_num.toString() + "@" + ret);
                         }
                         count++;
                         callback();
