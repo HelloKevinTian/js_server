@@ -46,7 +46,7 @@ function createRedisPool(db_name,config_file){
         // specifies how long a resource can stay idle in pool before being removed
         idleTimeoutMillis : config_file.idleTimeoutMillis,
         // if true, logs via console.log - can also be a function
-        log : true
+        log : false
     });
 }
 

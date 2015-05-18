@@ -48,7 +48,7 @@
 	"http-logger" : "ERROR",
 	"rank-logger" : "DEBUG",
 	"rank-for-pvp-logger" : "DEBUG",
-    	"relative-logger" : "DEBUG",
+  "relative-logger" : "DEBUG",
 	"absolute-logger" : "ERROR"
   }
 }
