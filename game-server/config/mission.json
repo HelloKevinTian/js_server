@@ -9,10 +9,10 @@
 	"accumulative": 1,
 	"number": 3,
 	"reward_desc": "",
-	"reward_type": "COIN",
+	"reward_type": "GEM",
 	"reward_data": 0,
-	"reward_number": 10000,
-	"reward_unit": "C",
+	"reward_number": 2,
+	"reward_unit": "G",
 	"rank": 5
 },
 {
