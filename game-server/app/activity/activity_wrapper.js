@@ -13,6 +13,7 @@ var activity_wrapper = function() {
 };
 
 activity_wrapper.prototype.init = function(activity_template){
+    redis_activity_wrapper.init_activity('template','2.6.0',activity_template);
     redis_activity_wrapper.init_activity('template','2.5.0',activity_template);
     redis_activity_wrapper.init_activity('template','2.4.0',activity_template);
     redis_activity_wrapper.init_activity('template','2.3.0',activity_template);
