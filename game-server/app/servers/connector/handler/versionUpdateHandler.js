@@ -15,8 +15,9 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_VERSION_UPDATE, function(msg, session, n
         var version_update_info;
         // var max_version;
         if(notice_json){
+            version_update_info = JSON.parse(notice_json[cur_version_template]);
             for(var w in notice_json){
-                if(w == cur_version_channel || w == cur_version_template){
+                if(w === cur_version_channel){
                     version_update_info = JSON.parse(notice_json[w]);
                 }
             }
