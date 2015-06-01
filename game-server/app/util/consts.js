@@ -60,6 +60,7 @@ module.exports = {
     TYPE_PVP: {
         PVP_RACER_NUM: 4, //pvp随机对手术量
         PVP_BOSS_RACER_ID: 19, //pvp随机boss的driver id
-        PVP_BOSS_WEIGHT: 0.5
+        PVP_BOSS_WEIGHT: 0.5,
+        PVP_DOUBLE_SCORE_CAR: 42 //积分加倍的车id
     }
 };
