@@ -71,7 +71,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
                 }
             }
             //  score is provide by client, which is the final result(include all loser's score).
-            if (msg.version === "2.6.0" && msg.car === consts.TYPE_PVP.PVP_DOUBLE_SCORE_CAR) { //2.6.0新加：如果当前车id是42，那么所得积分加倍
+            if (msg.version === "2.6.0" && msg.car.toString() === consts.TYPE_PVP.PVP_DOUBLE_SCORE_CAR.toString()) { //2.6.0新加：如果当前车id是42，那么所得积分加倍
                 score_add *= 2;
             }
             rank_info.score += score_add;
