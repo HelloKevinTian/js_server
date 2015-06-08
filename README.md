@@ -8,6 +8,6 @@ pomelo >= 8.0
 pomelo start -e production -D
 
 
-new branch for dump and load 1.3.0
+version:主干 master
 
 =======
