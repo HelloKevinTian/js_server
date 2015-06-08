@@ -8,6 +8,7 @@ var session = require('../util/session');
 var pomelo = require('pomelo');
 var log4js = require('log4js');
 var cluster = require('cluster');
+var crypto = require('crypto');
 var log_json = require('../../config/log.json');
 log4js.configure(log_json);
 var http_logger = log4js.getLogger('http-logger');
@@ -145,7 +146,41 @@ http_connectors.prototype.dispatchMessage = function(data,url,req,res){
         //  do nothing
         return;
     }
+    if (data === null){
+        return;
+    }
+
     var msg = JSON.parse(data.msg);
+    //================ md5 verify begin =========================
+    if(msg !== null && (msg.version == "2.4.0" || msg.version == "2.5.0")){
+        var md5key = '_ck_fatalrace_20150202';  //private key!!_ck_fatalrace_20150202
+        var md5str = JSON.stringify(msg) + md5key;
+
+        var md5sum = crypto.createHash('md5');
+        md5sum.update(md5str);                  //默认是binary
+        // md5sum.update(md5str,'binary');
+        // md5sum.update(md5str,'ascii');
+        // md5sum.update(md5str,'utf8');
+        var server_str = md5sum.digest('hex'); // The encoding can be 'hex', 'binary' or 'base64'
+        var client_str = data.token;
+        // console.log(JSON.stringify(msg));
+        // console.log("===================md==============111");
+        // console.log("server_str: " + server_str);
+        // console.log("client_str: " + client_str);
+        // console.log("===================md==============222");
+        http_logger.debug("server_str: " + server_str + " ### client_str: " + client_str);
+        if (server_str !== client_str) {
+            var result = {code :200,des:"ERROR:invalid message!! --ck"}
+            res.end(JSON.stringify(result) + '\n', 'utf8');
+            http_logger.debug("verify fail!!!");
+            return;
+        }
+        http_logger.debug("verify ok!!!");
+    }
+
+    //================ md5 verify end ===========================
+
+
     //  version mapping
     if(msg.version){
         if("1.2.9" == msg.version){
@@ -158,9 +193,9 @@ http_connectors.prototype.dispatchMessage = function(data,url,req,res){
     statistics_wrapper.requestsPerHourInc();
     statistics_wrapper.requestsPerMinuteInc();
     statistics_wrapper.statistics_device(msg.deviceid);
-    http_logger.debug("before dispatchMessage ... %j", msg);
+    http_logger.debug("C2S: %j", msg);
     handlerMgr.trigger(msg.msg_id,msg,this.session,function(error,res_msg){
-        http_logger.debug("after dispatchMessage ... %j", res_msg);
+        http_logger.debug("S2C: %j", res_msg);
         if(0){
             //  by default the encoding is 'utf8'.
             res.write(JSON.stringify(res_msg));
