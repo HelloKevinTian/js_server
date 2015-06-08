@@ -142,7 +142,7 @@ var get_player_info = function(device_guid, strength_min, strength_max, max_coun
                     //  mask word
                     pomelo.app.get('mask_word_wrapper').analysis(player_info_somebody.name, function(nickname_new) {
                         player_info_somebody.name = nickname_new;
-                        callback(null, player_info_array);
+                        callback(null, player_info_array, pvp_has_boss);
                     });
                 } else {
                     //  if rank_info is null,random from robot,usually it is impossible! just in case
