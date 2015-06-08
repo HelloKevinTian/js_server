@@ -8,6 +8,6 @@ pomelo >= 8.0
 pomelo start -e production -D
 
 
-version:主干 master
+version:主干 2.6.0
 
 =======
