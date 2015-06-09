@@ -19,13 +19,13 @@ var h_rank_pvp_cheat2 = 'h_rank_pvp_cheat2';
 var h_rank_pvp_upload = 'h_rank_pvp_upload';
 
 /**
- * add rank info at first enter pvp
+ * 首次进入或者比赛完上传积分时设置排名信息
  * @param device_guid
  * @param rank_info
  */
-redis_rank_pvp_wrapper.set_rank_info = function(channel,device_guid,rank_info,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hset(h_rank_pvp, device_guid, JSON.stringify(rank_info), function (err, reply) {
+redis_rank_pvp_wrapper.set_rank_info = function(channel, device_guid, rank_info, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hset(h_rank_pvp, device_guid, JSON.stringify(rank_info), function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -35,8 +35,8 @@ redis_rank_pvp_wrapper.set_rank_info = function(channel,device_guid,rank_info,cb
         });
     });
     var championship_id = util.getWeek(new Date());
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hset(h_rank_pvp + ":" + championship_id, device_guid, JSON.stringify(rank_info), function (err, reply) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hset(h_rank_pvp + ":" + championship_id, device_guid, JSON.stringify(rank_info), function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -45,9 +45,9 @@ redis_rank_pvp_wrapper.set_rank_info = function(channel,device_guid,rank_info,cb
             release();
         });
     });
-    if(pomelo.app.get('rank_pvp_wrapper').in_activity(channel)){
-        redis_pools.execute('pool_1',function(client, release) {
-            client.hset(h_rank_pvp + ":" + channel,device_guid, JSON.stringify(rank_info),function (err, reply) {
+    if (pomelo.app.get('rank_pvp_wrapper').in_activity(channel)) {
+        redis_pools.execute('pool_1', function(client, release) {
+            client.hset(h_rank_pvp + ":" + channel, device_guid, JSON.stringify(rank_info), function(err, reply) {
                 if (err) {
                     //  some thing log
                     rank_for_pvp_logger.error(err);
@@ -63,38 +63,34 @@ redis_rank_pvp_wrapper.set_rank_info = function(channel,device_guid,rank_info,cb
  * @param device_guid
  * @param cb
  */
-redis_rank_pvp_wrapper.get_rank_info = function(device_guid,device_emui,cb){
+redis_rank_pvp_wrapper.get_rank_info = function(device_guid, device_emui, cb) {
     //  use device_guid first, if not exist,try device_emui
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hget(h_rank_pvp, device_guid, function (err, reply) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hget(h_rank_pvp, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
             }
-            if(!reply){
-                redis_pools.execute('pool_1',function(client, release) {
-                    client.hget(h_rank_pvp, device_emui, function (err, reply) {
+            if (!reply) { //旧版本存的device_emui, 后来新版本换成device_guid作为key
+                redis_pools.execute('pool_1', function(client, release) {
+                    client.hget(h_rank_pvp, device_emui, function(err, reply) {
                         if (err) {
                             //  some thing log
                             rank_for_pvp_logger.error(err);
                         }
-                        if(reply){
+                        if (reply) {
                             //  copy data from device_emui to device_guid
                             var rank_info = JSON.parse(reply);
-                            //  clear data
-                            //rank_info.phone_number = "";
-                            //rank_info.nickname = "跑男车手";
-                            //rank_info.area = "滨海市";
-                            redis_rank_pvp_wrapper.set_rank_info(rank_info.channel,device_emui,rank_info,function(){});
+                            redis_rank_pvp_wrapper.set_rank_info(rank_info.channel, device_emui, rank_info, function() {});
                             rank_info.device_guid = device_guid;
                             redis_rank_pvp_wrapper.dump_rank_pvp(rank_info);
                             reply = JSON.stringify(rank_info);
+                            cb(reply);
                         }
-                        cb(reply);
                         release();
                     });
                 });
-            }else{
+            } else {
                 cb(reply);
             }
             release();
@@ -102,14 +98,10 @@ redis_rank_pvp_wrapper.get_rank_info = function(device_guid,device_emui,cb){
     });
 };
 
-/**
- * get rank info form redis batch
- * @param device_guid
- * @param cb
- */
-redis_rank_pvp_wrapper.get_rank_info_batch = function(device_guid_array,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hmget(h_rank_pvp, device_guid_array, function (err, reply) {
+// 批量取出排名信息
+redis_rank_pvp_wrapper.get_rank_info_batch = function(device_guid_array, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hmget(h_rank_pvp, device_guid_array, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -120,9 +112,10 @@ redis_rank_pvp_wrapper.get_rank_info_batch = function(device_guid_array,cb){
     });
 };
 
-redis_rank_pvp_wrapper.get_rank_info_weekly_batch = function(championship_id,device_guid_array,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hmget(h_rank_pvp + ":" + championship_id, device_guid_array, function (err, reply) {
+//批量取出周排名信息
+redis_rank_pvp_wrapper.get_rank_info_weekly_batch = function(championship_id, device_guid_array, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hmget(h_rank_pvp + ":" + championship_id, device_guid_array, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -133,9 +126,10 @@ redis_rank_pvp_wrapper.get_rank_info_weekly_batch = function(championship_id,dev
     });
 };
 
-redis_rank_pvp_wrapper.get_rank_info_activity_batch = function(championship_id,device_guid_array,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hmget(h_rank_pvp + ":" + championship_id, device_guid_array, function (err, reply) {
+//批量取出活动排名信息
+redis_rank_pvp_wrapper.get_rank_info_activity_batch = function(championship_id, device_guid_array, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hmget(h_rank_pvp + ":" + championship_id, device_guid_array, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -146,37 +140,26 @@ redis_rank_pvp_wrapper.get_rank_info_activity_batch = function(championship_id,d
     });
 };
 
-/**
- * update some about area,phone info for player
- * @param device_guid
- * @param area
- * @param phone
- * @param cb
- */
-redis_rank_pvp_wrapper.update_rank_info = function(device_guid,device_emui,channel,area,phone_number,nickname,cb){
-    redis_rank_pvp_wrapper.get_rank_info(device_guid,device_emui,function(rank_info){
-        if(rank_info){
+//更新玩家地区、手机号、昵称信息
+redis_rank_pvp_wrapper.update_rank_info = function(device_guid, device_emui, channel, area, phone_number, nickname, cb) {
+    redis_rank_pvp_wrapper.get_rank_info(device_guid, device_emui, function(rank_info) {
+        if (rank_info) {
             rank_info = JSON.parse(rank_info);
             rank_info.area = area;
             rank_info.phone_number = phone_number;
             rank_info.nickname = nickname;
-            redis_rank_pvp_wrapper.set_rank_info(channel,device_guid,rank_info);
+            redis_rank_pvp_wrapper.set_rank_info(channel, device_guid, rank_info);
         }
         cb(rank_info);
     });
 };
 
-/**
- * update score to rank/rank weekly
- * @param device_guid
- * @param championship_id : the week index
- * @param score : the latest score
- */
-redis_rank_pvp_wrapper.update_score_rank = function(channel,device_guid,championship_id,rank_info){
+//更新单人pvp的总排名和周排名
+redis_rank_pvp_wrapper.update_score_rank = function(channel, device_guid, championship_id, rank_info) {
     //  avoid score is 0 in redis
-    if(0 != rank_info.score){
-        redis_pools.execute('pool_1',function(client, release) {
-            client.zadd(z_rank_pvp_score, rank_info.score,device_guid, function (err, reply) {
+    if (0 != rank_info.score) {
+        redis_pools.execute('pool_1', function(client, release) {
+            client.zadd(z_rank_pvp_score, rank_info.score, device_guid, function(err, reply) {
                 if (err) {
                     //  some thing log
                     rank_for_pvp_logger.error(err);
@@ -186,9 +169,9 @@ redis_rank_pvp_wrapper.update_score_rank = function(channel,device_guid,champion
         });
     }
     //  avoid score_weekly is 0 in redis
-    if(0 != rank_info.score_weekly){
-        redis_pools.execute('pool_1',function(client, release) {
-            client.zadd(z_rank_pvp_score + ":" + championship_id, rank_info.score_weekly,device_guid, function (err, reply) {
+    if (0 != rank_info.score_weekly) {
+        redis_pools.execute('pool_1', function(client, release) {
+            client.zadd(z_rank_pvp_score + ":" + championship_id, rank_info.score_weekly, device_guid, function(err, reply) {
                 if (err) {
                     //  some thing log
                     rank_for_pvp_logger.error(err);
@@ -197,11 +180,11 @@ redis_rank_pvp_wrapper.update_score_rank = function(channel,device_guid,champion
             });
         });
     }
-    if(pomelo.app.get('rank_pvp_wrapper').in_activity(channel)){
+    if (pomelo.app.get('rank_pvp_wrapper').in_activity(channel)) {
         //  avoid score_activity is 0 in redis
-        if(0 != rank_info.score_activity){
-            redis_pools.execute('pool_1',function(client, release) {
-                client.zadd(z_rank_pvp_score + ":" + channel, rank_info.score_activity,device_guid, function (err, reply) {
+        if (0 != rank_info.score_activity) {
+            redis_pools.execute('pool_1', function(client, release) {
+                client.zadd(z_rank_pvp_score + ":" + channel, rank_info.score_activity, device_guid, function(err, reply) {
                     if (err) {
                         //  some thing log
                         rank_for_pvp_logger.error(err);
@@ -210,8 +193,8 @@ redis_rank_pvp_wrapper.update_score_rank = function(channel,device_guid,champion
                 });
             });
             //  if the channel is different from store in file, record it!
-            if(channel != rank_info.channel){
-                redis_rank_pvp_wrapper.record_cheat2_info(channel,rank_info);
+            if (channel != rank_info.channel) {
+                redis_rank_pvp_wrapper.record_cheat2_info(channel, rank_info);
             }
         }
     }
@@ -228,14 +211,10 @@ redis_rank_pvp_wrapper.update_score_rank = function(channel,device_guid,champion
     */
 };
 
-/**
- * get rank by score
- * @param device_guid
- * @param cb
- */
-redis_rank_pvp_wrapper.get_score_rank = function(device_guid,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zrevrank(z_rank_pvp_score,device_guid,function (err, reply) {
+//取单人总排名
+redis_rank_pvp_wrapper.get_score_rank = function(device_guid, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrank(z_rank_pvp_score, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -246,13 +225,10 @@ redis_rank_pvp_wrapper.get_score_rank = function(device_guid,cb){
     });
 };
 
-/**
- * get score rank from 1 to 10
- * @param cb
- */
-redis_rank_pvp_wrapper.get_score_rank_partial = function(cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zrevrange(z_rank_pvp_score,0,9,function (err, reply) {
+//取总榜前十排名
+redis_rank_pvp_wrapper.get_score_rank_partial = function(cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrange(z_rank_pvp_score, 0, 9, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -263,15 +239,10 @@ redis_rank_pvp_wrapper.get_score_rank_partial = function(cb){
     });
 };
 
-/**
- * get rank by score weekly
- * @param device_guid
- * @param championship_id
- * @param cb
- */
-redis_rank_pvp_wrapper.get_score_rank_weekly = function(device_guid,championship_id,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zrevrank(z_rank_pvp_score + ":" + championship_id,device_guid, function (err, reply) {
+//取单人周排名
+redis_rank_pvp_wrapper.get_score_rank_weekly = function(device_guid, championship_id, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrank(z_rank_pvp_score + ":" + championship_id, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -282,9 +253,10 @@ redis_rank_pvp_wrapper.get_score_rank_weekly = function(device_guid,championship
     });
 };
 
-redis_rank_pvp_wrapper.get_score_rank_activity = function(device_guid,channel,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zrevrank(z_rank_pvp_score + ":" + channel,device_guid, function (err, reply) {
+//取单人渠道排名
+redis_rank_pvp_wrapper.get_score_rank_activity = function(device_guid, channel, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrank(z_rank_pvp_score + ":" + channel, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -295,14 +267,10 @@ redis_rank_pvp_wrapper.get_score_rank_activity = function(device_guid,channel,cb
     });
 };
 
-/**
- * get the top 10 by score weekly
- * @param championship_id
- * @param cb
- */
-redis_rank_pvp_wrapper.get_score_rank_partial_weekly = function(championship_id,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zrevrange(z_rank_pvp_score + ":" + championship_id,0,9,function (err, reply) {
+//取周排行榜前十名
+redis_rank_pvp_wrapper.get_score_rank_partial_weekly = function(championship_id, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrange(z_rank_pvp_score + ":" + championship_id, 0, 9, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -313,13 +281,14 @@ redis_rank_pvp_wrapper.get_score_rank_partial_weekly = function(championship_id,
     });
 };
 
-redis_rank_pvp_wrapper.get_score_rank_partial_activity = function(device_guid,championship_id,cb){
-    redis_rank_pvp_wrapper.get_score_rank_weekly(device_guid,championship_id,function(mine_score_rank_weekly){
+//取周排行中某人前十名和后十名的device_guid和分数信息
+redis_rank_pvp_wrapper.get_score_rank_partial_activity = function(device_guid, championship_id, cb) {
+    redis_rank_pvp_wrapper.get_score_rank_weekly(device_guid, championship_id, function(mine_score_rank_weekly) {
         var score_rank_weekly = (mine_score_rank_weekly != null) ? parseInt(mine_score_rank_weekly) + 1 : mine_score_rank_weekly;
         var rank_range_low = (score_rank_weekly - 11) > 0 ? score_rank_weekly - 11 : 0;
         var rank_range_high = score_rank_weekly != null ? (score_rank_weekly + 9) : 9;
-        redis_pools.execute('pool_1',function(client, release) {
-            client.zrevrange(z_rank_pvp_score + ":" + championship_id,rank_range_low,rank_range_high,function (err, reply) {
+        redis_pools.execute('pool_1', function(client, release) {
+            client.zrevrange(z_rank_pvp_score + ":" + championship_id, rank_range_low, rank_range_high, function(err, reply) {
                 if (err) {
                     //  some thing log
                     rank_for_pvp_logger.error(err);
@@ -331,14 +300,10 @@ redis_rank_pvp_wrapper.get_score_rank_partial_activity = function(device_guid,ch
     });
 };
 
-/**
- * get current week's rank info
- * @param championship_id
- * @param cb
- */
-redis_rank_pvp_wrapper.get_all_rank_info_weekly = function(championship_id,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hgetall(h_rank_pvp + ":" + championship_id,function (err, reply) {
+//取周排行的全部排名信息
+redis_rank_pvp_wrapper.get_all_rank_info_weekly = function(championship_id, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hgetall(h_rank_pvp + ":" + championship_id, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -349,14 +314,10 @@ redis_rank_pvp_wrapper.get_all_rank_info_weekly = function(championship_id,cb){
     });
 };
 
-/**
- * set award
- * @param device_guid
- * @param award_info
- */
-redis_rank_pvp_wrapper.set_award = function(device_guid,award_info){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hset(h_award_pvp,device_guid, JSON.stringify(award_info),function (err, reply) {
+//设置单人pvp奖励
+redis_rank_pvp_wrapper.set_award = function(device_guid, award_info) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hset(h_award_pvp, device_guid, JSON.stringify(award_info), function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -366,14 +327,10 @@ redis_rank_pvp_wrapper.set_award = function(device_guid,award_info){
     });
 };
 
-/**
- * get award
- * @param device_guid
- * @param cb
- */
-redis_rank_pvp_wrapper.get_award = function(device_guid,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hget(h_award_pvp,device_guid,function (err, reply) {
+//取单人pvp奖励信息
+redis_rank_pvp_wrapper.get_award = function(device_guid, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hget(h_award_pvp, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -384,13 +341,10 @@ redis_rank_pvp_wrapper.get_award = function(device_guid,cb){
     });
 };
 
-/**
- * del award
- * @param device_guid
- */
-redis_rank_pvp_wrapper.del_award = function(device_guid){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hdel(h_award_pvp,device_guid,function (err, reply) {
+//删除单人pvp奖励信息
+redis_rank_pvp_wrapper.del_award = function(device_guid) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hdel(h_award_pvp, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -400,14 +354,10 @@ redis_rank_pvp_wrapper.del_award = function(device_guid){
     });
 };
 
-/**
- * update score to rank
- * @param device_guid
- * @param strength
- */
-redis_rank_pvp_wrapper.update_strength_rank = function(device_guid,strength){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.zadd(z_rank_pvp_strength, strength,device_guid, function (err, reply) {
+//更新单人pvp战力排行信息
+redis_rank_pvp_wrapper.update_strength_rank = function(device_guid, strength) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zadd(z_rank_pvp_strength, strength, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -417,14 +367,10 @@ redis_rank_pvp_wrapper.update_strength_rank = function(device_guid,strength){
     });
 };
 
-/**
- * get rank by strength
- * @param device_guid
- * @param cb
- */
-redis_rank_pvp_wrapper.get_strength_rank = function(device_guid,cb){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.rank(z_rank_pvp_strength,device_guid, function (err, reply) {
+//取单人pvp战力排行信息
+redis_rank_pvp_wrapper.get_strength_rank = function(device_guid, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.rank(z_rank_pvp_strength, device_guid, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -435,12 +381,13 @@ redis_rank_pvp_wrapper.get_strength_rank = function(device_guid,cb){
     });
 };
 
-redis_rank_pvp_wrapper.get_player_by_strength = function(min,max,count,cb){
-    redis_pools.execute('pool_1',function(client, release) {
+//取特定数量的战力在一定区间的某些人的pvp战力信息
+redis_rank_pvp_wrapper.get_player_by_strength = function(min, max, count, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
         //  offset form the first result
         var offset = 0;
-        var args = [ z_rank_pvp_strength, min, max, 'LIMIT', offset, count ];
-        client.zrangebyscore(args, function (err, reply) {
+        var args = [z_rank_pvp_strength, min, max, 'LIMIT', offset, count];
+        client.zrangebyscore(args, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -454,22 +401,23 @@ redis_rank_pvp_wrapper.get_player_by_strength = function(min,max,count,cb){
 /**
  * dump rank info from device emui to device guid
  */
-redis_rank_pvp_wrapper.dump_rank_pvp = function(rank_info){
+redis_rank_pvp_wrapper.dump_rank_pvp = function(rank_info) {
     var channel = rank_info.channel;
     var device_guid = rank_info.device_guid;
     var strength = rank_info.strength;
     var championship_id = util.getWeek(new Date());
-    if(championship_id != rank_info.championship_id){
+    if (championship_id != rank_info.championship_id) {
         rank_info.score_weekly = 0;
     }
-    redis_rank_pvp_wrapper.set_rank_info(channel,device_guid,rank_info,function(){});
-    redis_rank_pvp_wrapper.update_score_rank(channel,device_guid,championship_id,rank_info);
-    redis_rank_pvp_wrapper.update_strength_rank(device_guid,strength);
+    redis_rank_pvp_wrapper.set_rank_info(channel, device_guid, rank_info, function() {});
+    redis_rank_pvp_wrapper.update_score_rank(channel, device_guid, championship_id, rank_info);
+    redis_rank_pvp_wrapper.update_strength_rank(device_guid, strength);
 };
 
-redis_rank_pvp_wrapper.record_cheat_info = function(device_guid,rank_info){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hset(h_rank_pvp_cheat,Date.now(), JSON.stringify(rank_info),function (err, reply) {
+//pvp两次上传积分时间在45秒内的记录为作弊者
+redis_rank_pvp_wrapper.record_cheat_info = function(device_guid, rank_info) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hset(h_rank_pvp_cheat, Date.now(), JSON.stringify(rank_info), function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -479,9 +427,10 @@ redis_rank_pvp_wrapper.record_cheat_info = function(device_guid,rank_info){
     });
 };
 
-redis_rank_pvp_wrapper.record_cheat2_info = function(channel,rank_info){
-    redis_pools.execute('pool_1',function(client, release) {
-        client.hset(h_rank_pvp_cheat2,Date.now() + ':' + channel, JSON.stringify(rank_info),function (err, reply) {
+//特定渠道的活动作弊信息（不常用）
+redis_rank_pvp_wrapper.record_cheat2_info = function(channel, rank_info) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hset(h_rank_pvp_cheat2, Date.now() + ':' + channel, JSON.stringify(rank_info), function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
