@@ -1,6 +1,6 @@
 {
   "calc_award":1,
-  "require_version":"2.3.0",
+  "require_version":"2.4.0",
   "activity":[
     {"channel":"000013","duration":["2015/2/6","2015/2/20"]}
   ],
