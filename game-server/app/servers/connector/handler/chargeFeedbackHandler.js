@@ -11,7 +11,7 @@ var pomelo = require('pomelo');
 handlerMgr.handler(consts.TYPE_MSG.TYPE_SET_CHARGE_FEEDBACK_INFO, function(msg, session, next) {
     var channel = msg.channel;
     var version = msg.version;
-    var phone_num = msg.phone_num;
+    var phone_num = msg.phone_number;
     var player_guid = msg.player_guid;
 
     var activity = {};
@@ -38,10 +38,18 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_SET_CHARGE_FEEDBACK_INFO, function(msg, 
             charge_feedback_wrapper.set(key,value);
 
             next(null, {
+                code: 0,
+                msg_id : msg.msg_id,
+                flowid : msg.flowid,
+                time:Math.floor(Date.now()/1000),
                 result: 0
             });
         } else {
             next(null, {
+                code: 0,
+                msg_id : msg.msg_id,
+                flowid : msg.flowid,
+                time:Math.floor(Date.now()/1000),
                 result: 1
             });
         }
