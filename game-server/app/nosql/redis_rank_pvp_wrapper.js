@@ -85,8 +85,8 @@ redis_rank_pvp_wrapper.get_rank_info = function(device_guid, device_emui, cb) {
                             rank_info.device_guid = device_guid;
                             redis_rank_pvp_wrapper.dump_rank_pvp(rank_info);
                             reply = JSON.stringify(rank_info);
-                            cb(reply);
                         }
+                        cb(reply);
                         release();
                     });
                 });
