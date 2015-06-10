@@ -33,7 +33,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_SET_CHARGE_FEEDBACK_INFO, function(msg, 
         var now_stamp = Date.now();
 
         if (now_stamp >= start_time_stamp && now_stamp <= end_time_stamp){
-            var key = player_guid.toString() + "@" + activity.startTime;
+            var key = player_guid.toString() + "@" + activity.startTime + "@" + version + "@" + channel;
             var value = phone_num.toString();
             charge_feedback_wrapper.set(key,value);
 
