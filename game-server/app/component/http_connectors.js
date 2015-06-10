@@ -164,7 +164,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         var md5str = JSON.stringify(msg) + md5key;
 
         var md5sum = crypto.createHash('md5');
-        md5sum.update(md5str); //默认是binary
+        md5sum.update(md5str,'utf8'); //默认是binary,使用utf8
         // md5sum.update(md5str,'binary');
         // md5sum.update(md5str,'ascii');
         // md5sum.update(md5str,'utf8');
