@@ -196,7 +196,7 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
     var now_stamp = Date.now();
 
     //是否在活动时间内
-    if (now_stamp >= entity_startTime_stamp && now_stamp <= entity_endTime_stamp) {
+    if (now_stamp >= entity_startTime_stamp && now_stamp <= (entity_endTime_stamp + 3600 * 24 * 1000)) {
         //抽中，存玩家guid，item_type
         //设置手机号时  更新redis   phone_num_item_type
         //跑马取数据时 hvals  arr.reverse()
