@@ -36,6 +36,37 @@ var get_extra_info = function(player_info_somebody, score) {
     player_info_somebody.score_next = rival_vs_title_json[degree_next - 1].score;
 };
 
+var copy_rival_info = function(player_info_somebody,strength){
+    var rival_info = get_rival(strength);
+    player_info_somebody.level = rival_info.level;
+    player_info_somebody.name = rival_info.name;
+    player_info_somebody.from = rival_info.from;
+    player_info_somebody.car = rival_info.car;
+    player_info_somebody.car_lv = rival_info.car_lv;
+    player_info_somebody.driver = rival_info.driver;
+    player_info_somebody.driver_lv = rival_info.driver_lv;
+    player_info_somebody.strength = rival_info.strength;
+    player_info_somebody.score = rival_info.score;
+    player_info_somebody.drift = rival_info.drift;
+    player_info_somebody.weight = rival_info.weight;
+    player_info_somebody.attack = rival_info.attack;
+    player_info_somebody.speed_cruising = rival_info.speed_cruising;
+    player_info_somebody.speed_duel = rival_info.speed_duel;
+    player_info_somebody.speed_boost = rival_info.speed_boost;
+    player_info_somebody.accel = rival_info.accel;
+    player_info_somebody.accel_duel = rival_info.accel_duel;
+    player_info_somebody.accel_boost = rival_info.accel_boost;
+    player_info_somebody.distance_duel = rival_info.distance_duel;
+    player_info_somebody.distance_wait = rival_info.distance_wait;
+    player_info_somebody.distance_boost = rival_info.distance_boost;
+    player_info_somebody.distance_giveup = rival_info.distance_giveup;
+    player_info_somebody.time_giveup = rival_info.time_giveup;
+    player_info_somebody.time_boost = rival_info.time_boost;
+    player_info_somebody.cdtime_boost = rival_info.cdtime_boost;
+    player_info_somebody.evade_rate = rival_info.evade_rate;
+    player_info_somebody.coin = rival_info.coin;
+};
+
 var get_robot_rival_info = function(strength_min, strength_max, player_info_array, callback, version, pvp_has_boss) {
     var max_loop_count = 100;
     var cur_loop_count = 0;
@@ -61,7 +92,7 @@ var get_robot_rival_info = function(strength_min, strength_max, player_info_arra
 
     var player_info_somebody = new Object();
 
-    player_info_somebody = get_rival(random_val);
+    copy_rival_info(player_info_somebody,random_val);
 
     //2.6.0版本加入随机到boss的功能
     if (version === "2.6.0" && !pvp_has_boss && (Math.random() >= consts.TYPE_PVP.PVP_BOSS_WEIGHT)) {
@@ -126,7 +157,7 @@ var get_player_info = function(device_guid, strength_min, strength_max, max_coun
                     var player_info_somebody = new Object();
                     //  random json table
                     random_val = Math.floor(strength_min + Math.random() * (strength_max - strength_min));
-                    player_info_somebody = get_rival(rank_info.strength);
+                    copy_rival_info(player_info_somebody,rank_info.strength);
                     player_info_somebody.device_guid = rank_info.device_guid;
                     player_info_somebody.name = rank_info.nickname;
                     player_info_somebody.strength = rank_info.strength;
