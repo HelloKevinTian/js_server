@@ -32,7 +32,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_SET_CHARGE_FEEDBACK_INFO, function(msg, 
         var end_time_stamp = end_time_date.getTime();
         var now_stamp = Date.now();
 
-        if (now_stamp >= start_time_stamp && now_stamp <= end_time_stamp){
+        if (now_stamp >= start_time_stamp && now_stamp <= (end_time_stamp + 3600 * 24 * 1000)){
             var now = new Date();
             var key = player_guid.toString() + "@" + activity.startTime + "@" + version + "@" + channel + "@" + now.toString();
             var value = phone_num.toString();
