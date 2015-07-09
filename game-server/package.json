@@ -10,7 +10,8 @@
 		"async":"0.9.0",
         "nodemailer":"0.7.0",
 		"log4js":"0.6.14",
-        "getmac ":"1.0.6"
+        "getmac ":"1.0.6",
+        "nodejieba ":"0.2.4"
     }
 }
 

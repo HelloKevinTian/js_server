@@ -6,11 +6,13 @@ var notice_wrapper = require('./app/notice/notice_wrapper');
 var statistics_wrapper = require('./app/statistics/statistics_wrapper');
 var rank_wrapper = require('./app/rank/rank_wrapper');
 var rank_running_man_wrapper = require('./app/rank/rank_running_man_wrapper');
+var rank_pvp_wrapper = require('./app/rank/rank_pvp_wrapper');
 var http_connectors = require('./app/component/http_connectors');
 var random_prize_wrapper = require('./app/random_prize/random_prize_wrapper');
 var random_prize_the_second_phase_wrapper = require('./app/random_prize/random_prize_the_second_phase_wrapper');
 var dump_load_wrapper = require('./app/dump_load/dump_load_wrapper');
 var sign_in_wrapper = require('./app/sign_in/sign_in_wrapper');
+var mask_word_wrapper = require('./app/mask_word/mask_word_wrapper');
 
 /**
  * Init app for client.
@@ -65,6 +67,10 @@ app.configure('production|development', 'connector', function(){
     var __rank_running_man_wrapper = new rank_running_man_wrapper();
     app.set('rank_running_man_wrapper',__rank_running_man_wrapper);
 
+    //  for rank pvp handler
+    var __rank_pvp_wrapper = new rank_pvp_wrapper();
+    app.set('rank_pvp_wrapper',__rank_pvp_wrapper);
+
     //  for random prize
     var __random_prize_wrapper = new random_prize_wrapper();
     app.set('random_prize_wrapper',__random_prize_wrapper);
@@ -80,6 +86,10 @@ app.configure('production|development', 'connector', function(){
     //  for sign in
     var __sign_in_wrapper = new sign_in_wrapper();
     app.set('sign_in_wrapper',__sign_in_wrapper);
+
+    //  for mask word
+    var __mask_word_wrapper = new mask_word_wrapper();
+    app.set('mask_word_wrapper',__mask_word_wrapper);
 });
 
 // start app

@@ -2,8 +2,10 @@
     "title": "",
     "abstract": "",
     "content": "",
-    "url1":"http://117.121.32.94:20002/show_200_1",
-    "url2":"http://117.121.32.94:20002/show_200_2",
+    "url1":"http://211.152.2.49:20002/announcement_103",
+    "url2":"http://211.152.2.49:20002/rewardlist_seoul_230",
+    "url3":"http://211.152.2.49:20002/reward_vs_weekly",
+    "url4":"http://211.152.2.49:20002/index_mm",
     "update":"false",
     "force_update":"false",
     "update_url":"http://sxupdate.racegame.appget.cn/updateTest.apk"
