@@ -1,0 +1,43 @@
+{
+  "1-2" :{
+    "item1":{"type":"RM_KEY","data":"","number":50,"icon":"K"},
+    "item2":{"type":"GEM","data":"","number":200,"icon":"G"},
+    "item3":{"type":"COIN","data":"","number":1000000,"icon":"C"},
+    "item4":{"type":"ITEM","data":"4","number":30,"icon":"X"},
+    "item5":{"type":"ITEM","data":"5","number":30,"icon":"Y"},
+    "item6":{"type":"ITEM","data":"6","number":30,"icon":"Z"}
+  },
+  "2-10" : {
+    "item1":{"type":"RM_KEY","data":"","number":30,"icon":"K"},
+    "item2":{"type":"GEM","data":"","number":50,"icon":"G"},
+    "item3":{"type":"COIN","data":"","number":500000,"icon":"C"},
+    "item4":{"type":"ITEM","data":"4","number":20,"icon":"X"},
+    "item5":{"type":"ITEM","data":"5","number":20,"icon":"Y"},
+    "item6":{"type":"ITEM","data":"6","number":20,"icon":"Z"}
+  },
+  "10-50" : {
+    "item1":{"type":"RM_KEY","data":"","number":20,"icon":"K"},
+    "item2":{"type":"COIN","data":"","number":100000,"icon":"C"},
+    "item3":{"type":"ITEM","data":"4","number":10,"icon":"X"},
+    "item4":{"type":"ITEM","data":"5","number":10,"icon":"Y"},
+    "item5":{"type":"ITEM","data":"6","number":10,"icon":"Z"}
+  },
+  "50-100" : {
+    "item1":{"type":"RM_KEY","data":"","number":15,"icon":"K"},
+    "item2":{"type":"COIN","data":"","number":80000,"icon":"C"},
+    "item3":{"type":"ITEM","data":"4","number":10,"icon":"X"},
+    "item4":{"type":"ITEM","data":"5","number":10,"icon":"Y"},
+    "item5":{"type":"ITEM","data":"6","number":10,"icon":"Z"}
+  },
+  "100-1000" : {
+    "item1":{"type":"RM_KEY","data":"","number":10,"icon":"K"},
+    "item2":{"type":"COIN","data":"","number":50000,"icon":"C"},
+    "item3":{"type":"ITEM","data":"4","number":5,"icon":"X"},
+    "item4":{"type":"ITEM","data":"5","number":5,"icon":"Y"},
+    "item5":{"type":"ITEM","data":"6","number":5,"icon":"Z"}
+  },
+  "1000-100000000" : {
+    "item1":{"type":"RM_KEY","data":"","number":3,"icon":"K"},
+    "item2":{"type":"COIN","data":"","number":20000,"icon":"C"}
+  }
+}
