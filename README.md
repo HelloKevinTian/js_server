@@ -8,6 +8,5 @@ pomelo >= 8.0
 pomelo start -e production -D
 
 
-version:wandoujia1.1.0
-version change log: add pvp
+wandoujia1.0.3
 =======
