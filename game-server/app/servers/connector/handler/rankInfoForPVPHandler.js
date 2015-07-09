@@ -65,9 +65,6 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANK_INFO_FOR_PVP, function (msg, sessio
                                 rank_info.racer = msg.driver;
                             }
                             callback(null, rank_info);
-                            if(rank_info){
-                                rank_pvp_wrapper.set_rank_info(channel,device_guid, rank_info,function(reply){});
-                            }
                         });
                         break;
                     }

@@ -9,6 +9,7 @@ var notice_wrapper = function() {
 };
 
 notice_wrapper.prototype.init = function(notice_template){
+    redis_notice_wrapper.init_notice('template','2.3.0',notice_template);
     redis_notice_wrapper.init_notice('template','2.2.3',notice_template);
     redis_notice_wrapper.init_notice('template','2.2.2',notice_template);
     redis_notice_wrapper.init_notice('template','2.2.1',notice_template);

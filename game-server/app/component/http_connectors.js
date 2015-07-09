@@ -162,6 +162,8 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
             msg.version = "2.2.2";
         } else if ("1.0.3" == msg.version) {
             msg.version = "2.2.3";
+        } else if ("1.1.0" == msg.version) { //add pvp
+            msg.version = "2.3.0";
         }
     }
     var statistics_wrapper = pomelo.app.get('statistics_wrapper');

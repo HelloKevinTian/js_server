@@ -6,13 +6,11 @@ var redis_activity_wrapper = require('../nosql/redis_activity_wrapper');
 
 var activity_wrapper = function() {
     //  init once
-    if(1)
-    {
-        this.init(activity_templete);
-    }
+    this.init(activity_templete);
 };
 
 activity_wrapper.prototype.init = function(activity_template){
+    redis_activity_wrapper.init_activity('template','2.3.0',activity_template);
     redis_activity_wrapper.init_activity('template','2.2.3',activity_template);
     redis_activity_wrapper.init_activity('template','2.2.2',activity_template);
     redis_activity_wrapper.init_activity('template','2.2.1',activity_template);
