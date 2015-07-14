@@ -173,8 +173,6 @@ rank_pvp_wrapper.prototype.in_activity = function(channel) {
                     var time_now = Date.now();
                     if (time_now >= time_start.getTime() && time_now < (time_end.getTime() + 3600 * 24 * 1000)) {
                         return 1;
-                    } else if (time_now > time_end.getTime()) {
-                        this.del_channel_rank_info(channel);
                     }
                 }
             }
