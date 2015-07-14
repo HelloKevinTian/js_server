@@ -21,8 +21,14 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANK_INFO_FOR_PVP, function (msg, sessio
     var rank_pvp_wrapper = pomelo.app.get("rank_pvp_wrapper");
     var acitivty_switch = rank_pvp_wrapper.activity_switch(channel);
     var url = rank_pvp_wrapper.get_url();
-    var total_rank_switch = rank_pvp_wrapper.total_rank_switch();
     var block_msg = rank_pvp_wrapper.block_msg();
+
+    //for 华为单独排行
+    var total_rank_switch = rank_pvp_wrapper.total_rank_switch();
+    if (rank_pvp_wrapper.in_activity(channel)) {
+        total_rank_switch = 0;
+    }
+
     async.waterfall([
             function (callback) {
                 switch (type) {
@@ -65,9 +71,9 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANK_INFO_FOR_PVP, function (msg, sessio
                                 rank_info.racer = msg.driver;
                             }
                             callback(null, rank_info);
-                            if(rank_info){
-                                rank_pvp_wrapper.set_rank_info(channel,device_guid, rank_info,function(reply){});
-                            }
+                            // if(rank_info){
+                            //     rank_pvp_wrapper.set_rank_info(channel,device_guid, rank_info,function(reply){});
+                            // }
                         });
                         break;
                     }
@@ -124,11 +130,18 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANK_INFO_FOR_PVP, function (msg, sessio
                     if(rank_info){
                         if(rank_info.championship_id != championship_id){
                             rank_info.score_weekly = 0;
-                            rank_info.score_activity = 0;
+                            if (!rank_pvp_wrapper.in_activity(channel)) {
+                                rank_info.score_activity = 0;
+                            }
                             rank_info.championship_id = championship_id;
                         }
                         pomelo.app.get('mask_word_wrapper').analysis(rank_info.nickname,function(nickname_new){
                             rank_info.nickname = nickname_new;
+                            if (rank_pvp_wrapper.in_activity(channel)) {
+                                rank_info.score_weekly = rank_info.score_activity;
+                            } else {
+                                rank_info.score_activity = rank_info.score_weekly;
+                            }
                             next(null, {
                                 code: 0,
                                 msg_id: msg.msg_id,

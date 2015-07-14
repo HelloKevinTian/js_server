@@ -52,6 +52,7 @@ redis_rank_pvp_wrapper.set_rank_info = function(channel, device_guid, rank_info,
                     //  some thing log
                     rank_for_pvp_logger.error(err);
                 }
+                cb(reply);
                 release();
             });
         });
@@ -116,6 +117,20 @@ redis_rank_pvp_wrapper.get_rank_info_batch = function(device_guid_array, cb) {
 redis_rank_pvp_wrapper.get_rank_info_weekly_batch = function(championship_id, device_guid_array, cb) {
     redis_pools.execute('pool_1', function(client, release) {
         client.hmget(h_rank_pvp + ":" + championship_id, device_guid_array, function(err, reply) {
+            if (err) {
+                //  some thing log
+                rank_for_pvp_logger.error(err);
+            }
+            cb(reply);
+            release();
+        });
+    });
+};
+
+//批量取出渠道排名信息
+redis_rank_pvp_wrapper.get_rank_info_channel_batch = function(channel, device_guid_array, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.hmget(h_rank_pvp + ":" + channel, device_guid_array, function(err, reply) {
             if (err) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
@@ -281,6 +296,20 @@ redis_rank_pvp_wrapper.get_score_rank_partial_weekly = function(championship_id,
     });
 };
 
+//取渠道排行榜前十名
+redis_rank_pvp_wrapper.get_score_rank_partial_channel = function(channel, cb) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.zrevrange(z_rank_pvp_score + ":" + channel, 0, 9, function(err, reply) {
+            if (err) {
+                //  some thing log
+                rank_for_pvp_logger.error(err);
+            }
+            cb(reply);
+            release();
+        });
+    });
+};
+
 //取周排行中某人前十名和后十名的device_guid和分数信息
 redis_rank_pvp_wrapper.get_score_rank_partial_activity = function(device_guid, championship_id, cb) {
     redis_rank_pvp_wrapper.get_score_rank_weekly(device_guid, championship_id, function(mine_score_rank_weekly) {
@@ -289,6 +318,25 @@ redis_rank_pvp_wrapper.get_score_rank_partial_activity = function(device_guid, c
         var rank_range_high = score_rank_weekly != null ? (score_rank_weekly + 9) : 9;
         redis_pools.execute('pool_1', function(client, release) {
             client.zrevrange(z_rank_pvp_score + ":" + championship_id, rank_range_low, rank_range_high, function(err, reply) {
+                if (err) {
+                    //  some thing log
+                    rank_for_pvp_logger.error(err);
+                }
+                cb(reply);
+                release();
+            });
+        });
+    });
+};
+
+//取渠道排行中某人前十名和后十名的device_guid和分数信息
+redis_rank_pvp_wrapper.get_score_rank_partial_activity_channel = function(device_guid, channel, cb) {
+    redis_rank_pvp_wrapper.get_score_rank_activity(device_guid, channel, function(mine_score_rank_weekly) {
+        var score_rank_weekly = (mine_score_rank_weekly != null) ? parseInt(mine_score_rank_weekly) + 1 : mine_score_rank_weekly;
+        var rank_range_low = (score_rank_weekly - 11) > 0 ? score_rank_weekly - 11 : 0;
+        var rank_range_high = score_rank_weekly != null ? (score_rank_weekly + 9) : 9;
+        redis_pools.execute('pool_1', function(client, release) {
+            client.zrevrange(z_rank_pvp_score + ":" + channel, rank_range_low, rank_range_high, function(err, reply) {
                 if (err) {
                     //  some thing log
                     rank_for_pvp_logger.error(err);
@@ -353,6 +401,31 @@ redis_rank_pvp_wrapper.del_award = function(device_guid) {
         });
     });
 };
+
+//删除单渠道排名信息
+redis_rank_pvp_wrapper.del_channel_rank_info = function(channel) {
+    redis_pools.execute('pool_1', function(client, release) {
+        client.exists(h_rank_pvp + ":" + channel, function(err, is_exist){
+            if (is_exist) {
+                    console.log("delete channel rank info");
+                    client.del(h_rank_pvp + ":" + channel, function(err) {
+                        if (err) {
+                            rank_for_pvp_logger.error(err);
+                        }
+                    });
+                    client.del(z_rank_pvp_score + ":" + channel, function(err) {
+                        if (err) {
+                            rank_for_pvp_logger.error(err);
+                        }
+                        release();
+                    });
+            } else {
+                release();
+            }
+        })
+    });
+
+}
 
 //更新单人pvp战力排行信息
 redis_rank_pvp_wrapper.update_strength_rank = function(device_guid, strength) {

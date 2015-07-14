@@ -65,7 +65,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
                 if (interval_time < 45 * 1000) {
                     //  if the time is too short, do return any data,and record this
                     rank_pvp_wrapper.record_cheat_info(device_guid, rank_info);
-                    return;
+                    // return;
                 } else {
                     rank_info.upload_last_time = cur_time;
                 }
@@ -82,14 +82,22 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
                 rank_info.championship_id = championship_id;
             }
             //  update 2015/3/11 set score_activity's value is score_weekly
-            rank_info.score_activity = rank_info.score_weekly;
             if (rank_pvp_wrapper.in_activity(channel)) {
                 //  version compatibility, 2.3.0 have not the value of score_activity
                 if (!rank_info.score_activity) {
                     rank_info.score_activity = 0;
                 }
                 rank_info.score_activity += score_add;
+            } else {
+                rank_info.score_activity = 0;
             }
+
+            // ------做华为排行时注释掉了，暂未发现之前其作用--------
+            // else {
+            //     rank_info.score_activity = rank_info.score_weekly;
+            // }
+            //--------------------------------------------------------
+
             //  calc degree
             var old_degree = rank_info.degree ? rank_info.degree : 1;
             var degree = old_degree;

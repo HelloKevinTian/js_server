@@ -115,15 +115,72 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
                     rank_pvp_wrapper.get_score_rank_activity(device_guid,channel,function (reply) {
                         callback(null, reply);
                     });
+                },
+                function (callback) {
+                    rank_pvp_wrapper.get_score_rank_partial_channel(channel, function (reply) {
+                        //  reply is rank as a json array
+                        if (0 != reply.length) {
+                            rank_pvp_wrapper.get_rank_info_channel_batch(channel,reply, function (reply) {
+                                callback(null, reply);
+                            });
+                        } else {
+                            callback(null, []);
+                        }
+                    });
+                },
+                function (callback) {
+                    //  update 2015/3/9, the activity is rank score weekly,from (my rank - 10) to (my rank  + 10)
+                    rank_pvp_wrapper.get_score_rank_partial_activity_channel(device_guid,channel,function (reply) {
+                        //  reply is rank as a json array
+                        if (0 != reply.length) {
+                            rank_pvp_wrapper.get_rank_info_channel_batch(channel,reply, function (reply) {
+                                var rank_info_array = reply;
+                                //  get week rank
+                                var count = 0;
+                                async.whilst(
+                                    function () { return count < rank_info_array.length; },
+                                    function (callback_whilst) {
+                                        async.waterfall([
+                                                function(callback_whilst){
+                                                    rank_pvp_wrapper.get_score_rank_activity(JSON.parse(rank_info_array[count]).device_guid,channel,function(cur_rank){
+                                                        callback_whilst(null,cur_rank);
+                                                    })
+                                                },
+                                                function(cur_rank,callback_whilst){
+                                                    var rank_info_tmp = JSON.parse(rank_info_array[count]);
+                                                    rank_info_tmp.rank = cur_rank;
+                                                    rank_info_array[count] = JSON.stringify(rank_info_tmp);
+                                                    callback_whilst(null);
+                                                }
+                                            ],
+                                            // optional callback
+                                            function(err){
+                                                if(err){
+                                                    console.error(err);
+                                                }
+                                                ++count;
+                                                callback_whilst(null);
+                                            });
+                                    },
+                                    function (err) {
+                                        //  whilst end,do nothing
+                                        if(err){
+                                            console.error(err);
+                                        }
+                                        callback(null, rank_info_array);
+                                    }
+                                );
+                            });
+                        } else {
+                            callback(null, []);
+                        }
+                    });
                 }
             ],
             // optional callback
             function (err, result) {
                 if (err) {
                     console.error(err);
-                }
-                if (0) {
-                    console.log("%j", result[1]);
                 }
                 var rank_info_array_weekly = result[0];
                 var rank_info_array = result[1];
@@ -136,6 +193,18 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
                 var score_rank_array_activity = [];
                 var degree;
                 var degree_title;
+
+                //for 华为单独排行
+                var rank_info_array_channel = result[6];
+                var rank_info_array_activity_channel = result[7];
+                if (rank_pvp_wrapper.in_activity(channel)) {
+                    rank_info_array_weekly = rank_info_array_channel;
+                    rank_info_array_activity = rank_info_array_activity_channel;
+
+                    mine_score_rank_weekly = mine_score_rank_activity;
+                }
+
+
                 for (var i = 0; i < rank_info_array.length; ++i) {
                     if (rank_info_array[i]) {
                         var rank_info = JSON.parse(rank_info_array[i]);
@@ -169,15 +238,27 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
                                 }
                             }
                         }
-                        score_rank_array_weekly.push({
-                            driver_id: rank_info.racer,
-                            car_id: rank_info.car,
-                            nickname: rank_info.nickname,
-                            degree_title: degree_title,
-                            area: rank_info.area,
-                            rank: i + 1,
-                            score: rank_info.score_weekly
-                        })
+                        if (rank_pvp_wrapper.in_activity(channel)) {
+                            score_rank_array_weekly.push({
+                                driver_id: rank_info.racer,
+                                car_id: rank_info.car,
+                                nickname: rank_info.nickname,
+                                degree_title: degree_title,
+                                area: rank_info.area,
+                                rank: i + 1,
+                                score: rank_info.score_activity
+                            })
+                        } else {
+                            score_rank_array_weekly.push({
+                                driver_id: rank_info.racer,
+                                car_id: rank_info.car,
+                                nickname: rank_info.nickname,
+                                degree_title: degree_title,
+                                area: rank_info.area,
+                                rank: i + 1,
+                                score: rank_info.score_weekly
+                            })
+                        }
                     }
                 }
                 for (var i = 0; i < rank_info_array_activity.length; ++i) {
@@ -191,15 +272,27 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
                                 }
                             }
                         }
-                        score_rank_array_activity.push({
-                            driver_id: rank_info.racer,
-                            car_id: rank_info.car,
-                            nickname: rank_info.nickname,
-                            degree_title: degree_title,
-                            area: rank_info.area,
-                            rank: rank_info.rank + 1,
-                            score: rank_info.score_weekly
-                        })
+                        if (rank_pvp_wrapper.in_activity(channel)) {
+                            score_rank_array_activity.push({
+                                driver_id: rank_info.racer,
+                                car_id: rank_info.car,
+                                nickname: rank_info.nickname,
+                                degree_title: degree_title,
+                                area: rank_info.area,
+                                rank: rank_info.rank + 1,
+                                score: rank_info.score_activity
+                            })
+                        } else {
+                            score_rank_array_activity.push({
+                                driver_id: rank_info.racer,
+                                car_id: rank_info.car,
+                                nickname: rank_info.nickname,
+                                degree_title: degree_title,
+                                area: rank_info.area,
+                                rank: rank_info.rank + 1,
+                                score: rank_info.score_weekly
+                            })
+                        }
                     }
                 }
                 //  mask word,so complicated!
