@@ -65,7 +65,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
                 if (interval_time < 45 * 1000) {
                     //  if the time is too short, do return any data,and record this
                     rank_pvp_wrapper.record_cheat_info(device_guid, rank_info);
-                    // return;
+                    return;
                 } else {
                     rank_info.upload_last_time = cur_time;
                 }
