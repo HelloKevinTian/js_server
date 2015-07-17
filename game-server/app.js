@@ -10,6 +10,7 @@ var rank_pvp_wrapper = require('./app/rank/rank_pvp_wrapper');
 var http_connectors = require('./app/component/http_connectors');
 var random_prize_wrapper = require('./app/random_prize/random_prize_wrapper');
 var random_prize_the_second_phase_wrapper = require('./app/random_prize/random_prize_the_second_phase_wrapper');
+var random_prize_the_fourth_phase_wrapper = require('./app/random_prize/random_prize_the_fourth_phase_wrapper');
 var dump_load_wrapper = require('./app/dump_load/dump_load_wrapper');
 var sign_in_wrapper = require('./app/sign_in/sign_in_wrapper');
 var mask_word_wrapper = require('./app/mask_word/mask_word_wrapper');
@@ -78,6 +79,10 @@ app.configure('production|development', 'connector', function(){
     //  for the second phase random prize
     var __random_prize_the_second_phase_wrapper = new random_prize_the_second_phase_wrapper();
     app.set('random_prize_the_second_phase_wrapper',__random_prize_the_second_phase_wrapper);
+
+    //  for the forth phase random prize
+    var __random_prize_the_fourth_phase_wrapper = new random_prize_the_fourth_phase_wrapper();
+    app.set('random_prize_the_fourth_phase_wrapper',__random_prize_the_fourth_phase_wrapper);
 
     //  for dump load
     var __dump_load_wrapper = new dump_load_wrapper();
