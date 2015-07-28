@@ -34,11 +34,13 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
         }
         var maintaining_msg = rank_pvp_wrapper.maintaining_msg();
         rank_pvp_wrapper.get_rank_info(device_guid, device_emui, function(rank_info) {
-            datelogger.debug("##111 msg24: " + JSON.stringify(msg));
-            datelogger.debug("##222 old rank: " + JSON.stringify(rank_info));
             if (rank_info) {
                 rank_info = JSON.parse(rank_info);
+                rank_info.version = version;
+                rank_info.channel = channel;
             }
+            datelogger.debug("##111 msg24: " + JSON.stringify(msg));
+            datelogger.debug("##222 old rank: " + JSON.stringify(rank_info));
             //  calc score and money
             var my_rank = msg.my_rank;
             var rivals = msg.rivals;

@@ -157,7 +157,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
 
     //================ md5 verify begin =========================
     //must config here when you have a new version!!!
-    var arr_version = ["2.4.0", "2.5.0", "2.6.0"];
+    var arr_version = ["2.4.0", "2.5.0", "2.6.0", "2.7.0"];
 
     if (arr_version.indexOf(msg.version) > -1) {
         var md5key = '_ck_fatalrace_20150202'; //private key!!_ck_fatalrace_20150202
