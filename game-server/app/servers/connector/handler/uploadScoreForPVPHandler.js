@@ -73,8 +73,13 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_UPLOAD_SCORE_FOR_PVP, function(msg, sess
                 }
             }
             //  score is provide by client, which is the final result(include all loser's score).
-            if (msg.version === "2.6.0" && msg.car.toString() === consts.TYPE_PVP.PVP_DOUBLE_SCORE_CAR.toString()) { //2.6.0新加：如果当前车id是42，那么所得积分加倍
-                score_add *= 2;
+            var version_str = msg.version.toString();
+            var version_arr = version_str.split('.');
+            if (version_arr[0] && version_arr[1] && version_arr[2]) {
+                var version_int = Number(version_arr[0]) * 100 + Number(version_arr[1]) * 10 + Number(version_arr[2]);
+                if (version_int >= 260 && msg.car.toString() === consts.TYPE_PVP.PVP_DOUBLE_SCORE_CAR.toString()) { //2.6.0新加：如果当前车id是42，那么所得积分加倍
+                    score_add *= 2;
+                }
             }
             rank_info.score += score_add;
             if (rank_info.championship_id == championship_id) {
