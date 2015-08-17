@@ -71,28 +71,7 @@ redis_rank_pvp_wrapper.get_rank_info = function(device_guid, device_emui, cb) {
                 //  some thing log
                 rank_for_pvp_logger.error(err);
             }
-            if (!reply) { //旧版本存的device_emui, 后来新版本换成device_guid作为key
-                redis_pools.execute('pool_1', function(client, release) {
-                    client.hget(h_rank_pvp, device_emui, function(err, reply) {
-                        if (err) {
-                            //  some thing log
-                            rank_for_pvp_logger.error(err);
-                        }
-                        if (reply) {
-                            //  copy data from device_emui to device_guid
-                            var rank_info = JSON.parse(reply);
-                            redis_rank_pvp_wrapper.set_rank_info(rank_info.channel, device_emui, rank_info, function() {});
-                            rank_info.device_guid = device_guid;
-                            redis_rank_pvp_wrapper.dump_rank_pvp(rank_info);
-                            reply = JSON.stringify(rank_info);
-                        }
-                        cb(reply);
-                        release();
-                    });
-                });
-            } else {
-                cb(reply);
-            }
+            cb(reply);
             release();
         });
     });
