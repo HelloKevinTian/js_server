@@ -1,7 +1,7 @@
 [{
 	"grade": 1,
 	"score": 0,
-	"title": "新手上路",
+	"title": "Lv.1",
 	"tnl": 50,
 	"buff_data": 1,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -13,7 +13,7 @@
 {
 	"grade": 2,
 	"score": 50,
-	"title": "见习车手",
+	"title": "Lv.2",
 	"tnl": 150,
 	"buff_data": 2,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -25,7 +25,7 @@
 {
 	"grade": 3,
 	"score": 200,
-	"title": "试驾车手",
+	"title": "Lv.3",
 	"tnl": 300,
 	"buff_data": 3,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -37,7 +37,7 @@
 {
 	"grade": 4,
 	"score": 500,
-	"title": "平凡车手",
+	"title": "Lv.4",
 	"tnl": 500,
 	"buff_data": 4,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -49,7 +49,7 @@
 {
 	"grade": 5,
 	"score": 1000,
-	"title": "熟练车手",
+	"title": "Lv.5",
 	"tnl": 1000,
 	"buff_data": 5,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -61,7 +61,7 @@
 {
 	"grade": 6,
 	"score": 2000,
-	"title": "竞速车手",
+	"title": "Lv.6",
 	"tnl": 1000,
 	"buff_data": 6,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -73,7 +73,7 @@
 {
 	"grade": 7,
 	"score": 3000,
-	"title": "飞驰车手",
+	"title": "Lv.7",
 	"tnl": 1000,
 	"buff_data": 7,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -85,7 +85,7 @@
 {
 	"grade": 8,
 	"score": 4000,
-	"title": "超越车手",
+	"title": "Lv.8",
 	"tnl": 1000,
 	"buff_data": 8,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -97,7 +97,7 @@
 {
 	"grade": 9,
 	"score": 5000,
-	"title": "领驭车手",
+	"title": "Lv.9",
 	"tnl": 1500,
 	"buff_data": 9,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -109,7 +109,7 @@
 {
 	"grade": 10,
 	"score": 6500,
-	"title": "羚羊先锋",
+	"title": "Lv.10",
 	"tnl": 1500,
 	"buff_data": 10,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -121,7 +121,7 @@
 {
 	"grade": 11,
 	"score": 8000,
-	"title": "猎豹先锋",
+	"title": "Lv.11",
 	"tnl": 1500,
 	"buff_data": 11,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -133,7 +133,7 @@
 {
 	"grade": 12,
 	"score": 9500,
-	"title": "天马先锋",
+	"title": "Lv.12",
 	"tnl": 1500,
 	"buff_data": 12,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -145,7 +145,7 @@
 {
 	"grade": 13,
 	"score": 11000,
-	"title": "飞龙先锋",
+	"title": "Lv.13",
 	"tnl": 2000,
 	"buff_data": 13,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -157,7 +157,7 @@
 {
 	"grade": 14,
 	"score": 13000,
-	"title": "火炎游侠",
+	"title": "Lv.14",
 	"tnl": 2000,
 	"buff_data": 14,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -169,7 +169,7 @@
 {
 	"grade": 15,
 	"score": 15000,
-	"title": "疾风游侠",
+	"title": "Lv.15",
 	"tnl": 2000,
 	"buff_data": 15,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -181,7 +181,7 @@
 {
 	"grade": 16,
 	"score": 17000,
-	"title": "闪电游侠",
+	"title": "Lv.16",
 	"tnl": 2000,
 	"buff_data": 16,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -193,7 +193,7 @@
 {
 	"grade": 17,
 	"score": 19000,
-	"title": "音速游侠",
+	"title": "Lv.17",
 	"tnl": 3000,
 	"buff_data": 17,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -205,7 +205,7 @@
 {
 	"grade": 18,
 	"score": 22000,
-	"title": "烈焰骑士",
+	"title": "Lv.18",
 	"tnl": 3000,
 	"buff_data": 18,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -217,7 +217,7 @@
 {
 	"grade": 19,
 	"score": 25000,
-	"title": "暴风骑士",
+	"title": "Lv.19",
 	"tnl": 3000,
 	"buff_data": 19,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -229,7 +229,7 @@
 {
 	"grade": 20,
 	"score": 28000,
-	"title": "雷霆骑士",
+	"title": "Lv.20",
 	"tnl": 3000,
 	"buff_data": 20,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -241,7 +241,7 @@
 {
 	"grade": 21,
 	"score": 31000,
-	"title": "光速骑士",
+	"title": "Lv.21",
 	"tnl": 5000,
 	"buff_data": 21,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -253,7 +253,7 @@
 {
 	"grade": 22,
 	"score": 36000,
-	"title": "竞速之王",
+	"title": "Lv.22",
 	"tnl": 10000,
 	"buff_data": 22,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -265,7 +265,7 @@
 {
 	"grade": 23,
 	"score": 46000,
-	"title": "飞速之王",
+	"title": "Lv.23",
 	"tnl": 15000,
 	"buff_data": 23,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -277,7 +277,7 @@
 {
 	"grade": 24,
 	"score": 61000,
-	"title": "极速之王",
+	"title": "Lv.24",
 	"tnl": 20000,
 	"buff_data": 24,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -289,7 +289,7 @@
 {
 	"grade": 25,
 	"score": 81000,
-	"title": "王中之王",
+	"title": "Lv.25",
 	"tnl": 25000,
 	"buff_data": 25,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -301,7 +301,7 @@
 {
 	"grade": 26,
 	"score": 106000,
-	"title": "孤高车神",
+	"title": "Lv.26",
 	"tnl": 30000,
 	"buff_data": 26,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -313,7 +313,7 @@
 {
 	"grade": 27,
 	"score": 136000,
-	"title": "常胜车神",
+	"title": "Lv.27",
 	"tnl": 50000,
 	"buff_data": 27,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -325,7 +325,7 @@
 {
 	"grade": 28,
 	"score": 186000,
-	"title": "无敌车神",
+	"title": "Lv.28",
 	"tnl": 100000,
 	"buff_data": 28,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -337,7 +337,7 @@
 {
 	"grade": 29,
 	"score": 286000,
-	"title": "传奇车神",
+	"title": "Lv.29",
 	"tnl": 200000,
 	"buff_data": 29,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -349,7 +349,7 @@
 {
 	"grade": 30,
 	"score": 486000,
-	"title": "红莲骑神",
+	"title": "Lv.30",
 	"tnl": 500000,
 	"buff_data": 30,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -361,7 +361,7 @@
 {
 	"grade": 31,
 	"score": 986000,
-	"title": "紫电骑神",
+	"title": "Lv.31",
 	"tnl": 1000000,
 	"buff_data": 31,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -373,7 +373,7 @@
 {
 	"grade": 32,
 	"score": 1986000,
-	"title": "霹雳骑神",
+	"title": "Lv.32",
 	"tnl": 2000000,
 	"buff_data": 32,
 	"buff_desc": "沿途获得金币+%d%%",
@@ -385,7 +385,7 @@
 {
 	"grade": 33,
 	"score": 3986000,
-	"title": "无双骑神",
+	"title": "Lv.33",
 	"tnl": -3986000,
 	"buff_data": 33,
 	"buff_desc": "沿途获得金币+%d%%",
