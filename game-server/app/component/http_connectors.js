@@ -12,6 +12,7 @@ var cluster = require('cluster');
 var log_json = require('../../config/log.json');
 log4js.configure(log_json);
 var http_logger = log4js.getLogger('http-logger');
+var redis_pools = require("../nosql/redis_pools");
 
 module.exports = function(app, opts) {
     return new http_connectors(app, opts);
@@ -133,27 +134,42 @@ http_connectors.prototype.parsePost = function(req, res, cb) {
 };
 
 http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
-    if (url == "/test") {
-        //  date for test
-        data = qs.parse('msg={"context": "context", "msg_id": 2}&account=king_lee');
-    } else if (url == "/status") {
+    if (url == "/status") {
         var result = {
             code: 200,
             status: "ok"
         }
-        res.end(JSON.stringify(result) + '\n', 'utf8');
-        return;
+        return res.end(JSON.stringify(result) + '\n', 'utf8');
     } else if (url == "/favicon.ico") {
         //  do nothing
         return;
     } else if (url == "/gv_gameicon") {
         var img = fs.readFileSync('./gv_gameicon.png');
-        res.writeHead(200, {'Content-Type': 'image/png' });
-        res.end(img, 'binary');
-        return;
-    } else if (url == "/pay_callback"){
-        res.end("success",'utf-8');
-        return;
+        res.writeHead(200, {
+            'Content-Type': 'image/png'
+        });
+        return res.end(img, 'binary');
+    } else if (url == "/pay_callback") {
+        return res.end("success", 'utf-8');
+    } else if (url == "/video_ad_reward") { //看完视频广告给奖励
+        //TODO redis set {orderid,app_id,time,idn,roleID,zoneID,item,quantity,extraParams,sign}
+        if (data && data.idn) {
+            redis_pools.execute('pool_1', function(client, release) {
+                client.hset('h_vedio_ad_reward', data.idn.toString(), JSON.stringify(data), function(err, reply) {
+                    if (err) {
+                        http_logger.debug('vedio ad reward redis error: ' + err);
+                        return res.end("fail", 'utf-8');
+                    }
+                    release();
+                    return res.end("success", 'utf-8');
+                });
+            });
+        } else {
+            return res.end("fail", 'utf-8');
+        }
+    }
+    if (!data.msg) {
+        return res.end("success", 'utf-8');
     }
     var msg = JSON.parse(data.msg);
     //  version mapping
