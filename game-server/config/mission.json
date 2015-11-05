@@ -1,6 +1,7 @@
 [{
 	"id": 1,
 	"desc": "[限时任务]完成今天的所有任务",
+	"desc_en": "[Time Limited] Complete today's ALL Quests",
 	"mission_type": "GEM",
 	"condition_type": "CLEAR_ALL_MISSION",
 	"used_car_id": 0,
@@ -18,6 +19,7 @@
 {
 	"id": 2,
 	"desc": "收集20枚绿色芯片",
+	"desc_en": "Collect 20 Green Chips",
 	"mission_type": "EASY",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -35,6 +37,7 @@
 {
 	"id": 3,
 	"desc": "收集35枚绿色芯片",
+	"desc_en": "Collect 35 Green Chips",
 	"mission_type": "EASY",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -52,6 +55,7 @@
 {
 	"id": 4,
 	"desc": "收集50枚绿色芯片",
+	"desc_en": "Collect 50 Green Chips",
 	"mission_type": "EASY",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -69,6 +73,7 @@
 {
 	"id": 5,
 	"desc": "累计漂移距离达到2000米",
+	"desc_en": "Drift Distance reaches 2000m",
 	"mission_type": "EASY",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -86,6 +91,7 @@
 {
 	"id": 6,
 	"desc": "累计漂移距离达到3000米",
+	"desc_en": "Drift Distance reaches 3000m",
 	"mission_type": "EASY",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -103,6 +109,7 @@
 {
 	"id": 7,
 	"desc": "累计漂移距离达到4000米",
+	"desc_en": "Drift Distance reaches 4000m",
 	"mission_type": "EASY",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -120,6 +127,7 @@
 {
 	"id": 8,
 	"desc": "累计行驶距离达到10000米",
+	"desc_en": "Driving Distance reaches 10000m",
 	"mission_type": "EASY",
 	"condition_type": "TOTAL_DRIVING_DISTANCE",
 	"used_car_id": 0,
@@ -137,6 +145,7 @@
 {
 	"id": 9,
 	"desc": "累计行驶距离达到15000米",
+	"desc_en": "Driving Distance reaches 15000m",
 	"mission_type": "EASY",
 	"condition_type": "TOTAL_DRIVING_DISTANCE",
 	"used_car_id": 0,
@@ -154,6 +163,7 @@
 {
 	"id": 10,
 	"desc": "摧毁10辆车",
+	"desc_en": "Destroy 10 Cars",
 	"mission_type": "EASY",
 	"condition_type": "DISTROY_CARS",
 	"used_car_id": 0,
@@ -171,6 +181,7 @@
 {
 	"id": 11,
 	"desc": "摧毁20辆车",
+	"desc_en": "Destroy 20 Cars",
 	"mission_type": "EASY",
 	"condition_type": "DISTROY_CARS",
 	"used_car_id": 0,
@@ -188,6 +199,7 @@
 {
 	"id": 12,
 	"desc": "在任意关卡中胜利3次",
+	"desc_en": "Win 3 times in any Chapter",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -205,6 +217,7 @@
 {
 	"id": 13,
 	"desc": "在追逐赛中胜利2次",
+	"desc_en": "Win 2 times in Pursuit Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -222,6 +235,7 @@
 {
 	"id": 14,
 	"desc": "在计时赛中胜利2次",
+	"desc_en": "Win 2 times in Timer Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -239,6 +253,7 @@
 {
 	"id": 15,
 	"desc": "在躲避赛中胜利1次",
+	"desc_en": "Win 1 time in Evasion Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -256,6 +271,7 @@
 {
 	"id": 16,
 	"desc": "在漂移赛中胜利1次",
+	"desc_en": "Win 1 time in Drifting Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -273,6 +289,7 @@
 {
 	"id": 17,
 	"desc": "在摧毁赛中胜利1次",
+	"desc_en": "Win 1 time in Destroyer Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -290,6 +307,7 @@
 {
 	"id": 18,
 	"desc": "在关卡中累计获得道具箱10次",
+	"desc_en": "Get 10 item boxes in chapter",
 	"mission_type": "EASY",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -307,6 +325,7 @@
 {
 	"id": 19,
 	"desc": "使用无敌狂飙累计冲刺2000米",
+	"desc_en": "Usage of Speeding sprints 2000m",
 	"mission_type": "EASY",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -324,6 +343,7 @@
 {
 	"id": 20,
 	"desc": "连续惊险超车3次",
+	"desc_en": "Continuous overtake with 3 times",
 	"mission_type": "EASY",
 	"condition_type": "OVERTAKE_COMBO",
 	"used_car_id": 0,
@@ -341,6 +361,7 @@
 {
 	"id": 21,
 	"desc": "在关卡中累计获得3个金块",
+	"desc_en": "Get 3 Gold Bullions in chapter",
 	"mission_type": "EASY",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -358,6 +379,7 @@
 {
 	"id": 22,
 	"desc": "获得1次车神称号",
+	"desc_en": "Get \"King Racer\" Title for 1 time",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -375,6 +397,7 @@
 {
 	"id": 23,
 	"desc": "收集100枚绿色芯片",
+	"desc_en": "Collect 100 Green Chips",
 	"mission_type": "NORMAL",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -392,6 +415,7 @@
 {
 	"id": 24,
 	"desc": "收集150枚绿色芯片",
+	"desc_en": "Collect 150 Green Chips",
 	"mission_type": "NORMAL",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -409,6 +433,7 @@
 {
 	"id": 25,
 	"desc": "收集200枚绿色芯片",
+	"desc_en": "Collect 200 Green Chips",
 	"mission_type": "NORMAL",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -426,6 +451,7 @@
 {
 	"id": 26,
 	"desc": "累计漂移距离达到5000米",
+	"desc_en": "Drift Distance reaches 5000m",
 	"mission_type": "NORMAL",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -443,6 +469,7 @@
 {
 	"id": 27,
 	"desc": "累计漂移距离达到6000米",
+	"desc_en": "Drift Distance reaches 6000m",
 	"mission_type": "NORMAL",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -460,6 +487,7 @@
 {
 	"id": 28,
 	"desc": "累计漂移距离达到8000米",
+	"desc_en": "Drift Distance reaches 8000m",
 	"mission_type": "NORMAL",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -477,6 +505,7 @@
 {
 	"id": 29,
 	"desc": "累计行驶距离达到20000米",
+	"desc_en": "Driving Distance reaches 20000m",
 	"mission_type": "NORMAL",
 	"condition_type": "TOTAL_DRIVING_DISTANCE",
 	"used_car_id": 0,
@@ -494,6 +523,7 @@
 {
 	"id": 30,
 	"desc": "累计行驶距离达到25000米",
+	"desc_en": "Driving Distance reaches 25000m",
 	"mission_type": "NORMAL",
 	"condition_type": "TOTAL_DRIVING_DISTANCE",
 	"used_car_id": 0,
@@ -511,6 +541,7 @@
 {
 	"id": 31,
 	"desc": "摧毁30辆车",
+	"desc_en": "Destroy 30 Cars",
 	"mission_type": "NORMAL",
 	"condition_type": "DISTROY_CARS",
 	"used_car_id": 0,
@@ -528,6 +559,7 @@
 {
 	"id": 32,
 	"desc": "在任意关卡中胜利5次",
+	"desc_en": "Win 5 times in any Chapter",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -545,6 +577,7 @@
 {
 	"id": 33,
 	"desc": "在追逐赛中胜利3次",
+	"desc_en": "Win 3 times in Pursuit Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -562,6 +595,7 @@
 {
 	"id": 34,
 	"desc": "在计时赛中胜利3次",
+	"desc_en": "Win 3 times in Timer Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -579,6 +613,7 @@
 {
 	"id": 35,
 	"desc": "在躲避赛中胜利2次",
+	"desc_en": "Win 2 times in Evasion Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -596,6 +631,7 @@
 {
 	"id": 36,
 	"desc": "在漂移赛中胜利3次",
+	"desc_en": "Win 3 times in Drifting Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -613,6 +649,7 @@
 {
 	"id": 37,
 	"desc": "在摧毁赛中胜利2次",
+	"desc_en": "Win 2 times in Destroyer Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -630,6 +667,7 @@
 {
 	"id": 38,
 	"desc": "在关卡中累计获得道具箱30次",
+	"desc_en": "Get 30 item boxes in chapter",
 	"mission_type": "NORMAL",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -647,6 +685,7 @@
 {
 	"id": 39,
 	"desc": "使用无敌狂飙累计冲刺4000米",
+	"desc_en": "Usage of Speeding sprints 4000m",
 	"mission_type": "NORMAL",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -664,6 +703,7 @@
 {
 	"id": 40,
 	"desc": "连续惊险超车5次",
+	"desc_en": "Continuous overtake with 5 times",
 	"mission_type": "NORMAL",
 	"condition_type": "OVERTAKE_COMBO",
 	"used_car_id": 0,
@@ -681,6 +721,7 @@
 {
 	"id": 41,
 	"desc": "在关卡中累计获得5个金块",
+	"desc_en": "Get 5 Gold Bullions in chapter",
 	"mission_type": "NORMAL",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -698,6 +739,7 @@
 {
 	"id": 42,
 	"desc": "累计得到3次车神称号",
+	"desc_en": "Get \"King Racer\" Title for 3 times",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -715,6 +757,7 @@
 {
 	"id": 43,
 	"desc": "使用量子幻影超车10次",
+	"desc_en": "Use Illusion Overtake for 10 times",
 	"mission_type": "NORMAL",
 	"condition_type": "OVERTAKE_CARS_IN_SHADOW",
 	"used_car_id": 0,
@@ -732,6 +775,7 @@
 {
 	"id": 44,
 	"desc": "收集300枚绿色芯片",
+	"desc_en": "Collect 300 Green Chips",
 	"mission_type": "HARD",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -749,6 +793,7 @@
 {
 	"id": 45,
 	"desc": "累计漂移距离达到10000米",
+	"desc_en": "Drift Distance reaches 10000m",
 	"mission_type": "HARD",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -766,6 +811,7 @@
 {
 	"id": 46,
 	"desc": "累计漂移距离达到15000米",
+	"desc_en": "Drift Distance reaches 15000m",
 	"mission_type": "HARD",
 	"condition_type": "TOTAL_DRIFT_DISTANCE",
 	"used_car_id": 0,
@@ -783,6 +829,7 @@
 {
 	"id": 47,
 	"desc": "累计行驶距离达到30000米",
+	"desc_en": "Driving Distance reaches 30000m",
 	"mission_type": "HARD",
 	"condition_type": "TOTAL_DRIVING_DISTANCE",
 	"used_car_id": 0,
@@ -800,6 +847,7 @@
 {
 	"id": 48,
 	"desc": "摧毁50辆车",
+	"desc_en": "Destroy 50 Cars",
 	"mission_type": "HARD",
 	"condition_type": "DISTROY_CARS",
 	"used_car_id": 0,
@@ -817,6 +865,7 @@
 {
 	"id": 49,
 	"desc": "在任意关卡中胜利10次",
+	"desc_en": "Win 10 times in any Chapter",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -834,6 +883,7 @@
 {
 	"id": 50,
 	"desc": "在追逐赛中胜利5次",
+	"desc_en": "Win 5 times in Pursuit Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -851,6 +901,7 @@
 {
 	"id": 51,
 	"desc": "在计时赛中胜利5次",
+	"desc_en": "Win 5 times in Timer Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -868,6 +919,7 @@
 {
 	"id": 52,
 	"desc": "在躲避赛中胜利3次",
+	"desc_en": "Win 3 times in Evasion Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -885,6 +937,7 @@
 {
 	"id": 53,
 	"desc": "在漂移赛中胜利3次",
+	"desc_en": "Win 3 times in Drifting Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -902,6 +955,7 @@
 {
 	"id": 54,
 	"desc": "在摧毁赛中胜利3次",
+	"desc_en": "Win 3 times in Destroyer Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -919,6 +973,7 @@
 {
 	"id": 55,
 	"desc": "在关卡中累计获得道具箱50次",
+	"desc_en": "Get 50 item boxes in chapter",
 	"mission_type": "HARD",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -936,6 +991,7 @@
 {
 	"id": 56,
 	"desc": "使用无敌狂飙累计冲刺10000米",
+	"desc_en": "Usage of Speeding sprints 10000m",
 	"mission_type": "HARD",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -953,6 +1009,7 @@
 {
 	"id": 57,
 	"desc": "连续惊险超车10次",
+	"desc_en": "Continuous overtake with 10 times",
 	"mission_type": "HARD",
 	"condition_type": "OVERTAKE_COMBO",
 	"used_car_id": 0,
@@ -970,6 +1027,7 @@
 {
 	"id": 58,
 	"desc": "在关卡中累计获得10个金块",
+	"desc_en": "Get 10 Gold Bullions in chapter",
 	"mission_type": "HARD",
 	"condition_type": "COLLECT",
 	"used_car_id": 0,
@@ -987,6 +1045,7 @@
 {
 	"id": 59,
 	"desc": "累计得到5次车神称号",
+	"desc_en": "Get \"King Racer\" Title for 5 times",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -1004,6 +1063,7 @@
 {
 	"id": 60,
 	"desc": "使用量子幻影超车50次",
+	"desc_en": "Use Illusion Overtake for 50 times",
 	"mission_type": "HARD",
 	"condition_type": "OVERTAKE_CARS_IN_SHADOW",
 	"used_car_id": 0,
@@ -1021,6 +1081,7 @@
 {
 	"id": 61,
 	"desc": "使用追踪飞弹摧毁100辆车",
+	"desc_en": "Use Missile to destroy 100 Cars",
 	"mission_type": "HARD",
 	"condition_type": "DISTROYED_CARS_BY_MISSILE",
 	"used_car_id": 0,
@@ -1037,7 +1098,8 @@
 },
 {
 	"id": 62,
-	"desc": "[限时任务]完成20个豌小豆的任务",
+	"desc": "[限时任务]完成20个粉红猫的任务",
+	"desc_en": "[Time Limited] Complete 20 Pinky's Quest",
 	"mission_type": "WEEKLY",
 	"condition_type": "CLEAR_ALL_MISSION",
 	"used_car_id": 0,
