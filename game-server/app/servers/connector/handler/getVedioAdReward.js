@@ -18,7 +18,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_VEDIO_AD_REWARD, function(msg, sessi
                 code: 0,
                 msg_id: msg.msg_id,
                 flowid: msg.flowid,
-                result: reply,
+                result: JSON.parse(reply),
                 time: Math.floor(Date.now() / 1000)
             });
         });
