@@ -379,7 +379,7 @@
 {
 	"id": 22,
 	"desc": "获得1次车神称号",
-	"desc_en": "Get "King Racer"\nfor 1 time",
+	"desc_en": "Get \"King Racer\"\nfor 1 time",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -739,7 +739,7 @@
 {
 	"id": 42,
 	"desc": "累计得到3次车神称号",
-	"desc_en": "Get "King Racer"\nfor 3 times",
+	"desc_en": "Get \"King Racer\"\nfor 3 times",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -1045,7 +1045,7 @@
 {
 	"id": 59,
 	"desc": "累计得到5次车神称号",
-	"desc_en": "Get "King Racer"\nfor 5 times",
+	"desc_en": "Get \"King Racer\"\nfor 5 times",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
