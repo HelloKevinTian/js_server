@@ -47,17 +47,13 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
             }
 
             //1.0.3版本加入实物抽奖
-            if (version === "2.2.2" || version === "1.0.2") {
-                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.2")
-            } else if (version === "2.2.3" || version === "1.0.3") {
-                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.3");
-            } else if (version === "2.3.0" || version === "1.1.0") {
-                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.3");
-            
-            //
-            // TODO 每出一个新版本这里都要做修改!!
-            //
+            var versionArr = version.split('.');
+            var totalVersion = Number(versionArr[0]) * 100 + Number(versionArr[1]) * 10 + Number(versionArr[2]);
 
+            if (totalVersion == 222) {
+                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.2")
+            } else if (totalVersion >= 223) {
+                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.3");
             } else { //1.0.2版本以前的抽奖规则
                 for (var i = 0; i < count; ++i) {
                     var gacha_array = new Array();
