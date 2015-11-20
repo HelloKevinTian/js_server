@@ -1,7 +1,7 @@
 [{
 	"id": 1,
 	"desc": "[限时任务]完成今天的所有任务",
-	"desc_en": "[Time Limited] Complete\ntoday's ALL Quests",
+	"desc_en": "[Time Limited] Complete|today's ALL Quests",
 	"mission_type": "GEM",
 	"condition_type": "CLEAR_ALL_MISSION",
 	"used_car_id": 0,
@@ -199,7 +199,7 @@
 {
 	"id": 12,
 	"desc": "在任意关卡中胜利3次",
-	"desc_en": "Win 3 times\nin any Chapter",
+	"desc_en": "Win 3 times|in any Chapter",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -217,7 +217,7 @@
 {
 	"id": 13,
 	"desc": "在追逐赛中胜利2次",
-	"desc_en": "Win 2 times\nin Pursuit Race",
+	"desc_en": "Win 2 times|in Pursuit Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -235,7 +235,7 @@
 {
 	"id": 14,
 	"desc": "在计时赛中胜利2次",
-	"desc_en": "Win 2 times\nin Timer Race",
+	"desc_en": "Win 2 times|in Timer Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -253,7 +253,7 @@
 {
 	"id": 15,
 	"desc": "在躲避赛中胜利1次",
-	"desc_en": "Win 1 time\nin Evasion Race",
+	"desc_en": "Win 1 time|in Evasion Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -271,7 +271,7 @@
 {
 	"id": 16,
 	"desc": "在漂移赛中胜利1次",
-	"desc_en": "Win 1 time\nin Drifting Race",
+	"desc_en": "Win 1 time|in Drifting Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -289,7 +289,7 @@
 {
 	"id": 17,
 	"desc": "在摧毁赛中胜利1次",
-	"desc_en": "Win 1 time\nin Destroyer Race",
+	"desc_en": "Win 1 time|in Destroyer Race",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -325,7 +325,7 @@
 {
 	"id": 19,
 	"desc": "使用无敌狂飙累计冲刺2000米",
-	"desc_en": "Usage of Speeding\nsprints 2000m",
+	"desc_en": "Usage of Speeding|sprints 2000m",
 	"mission_type": "EASY",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -379,7 +379,7 @@
 {
 	"id": 22,
 	"desc": "获得1次车神称号",
-	"desc_en": "Get \"King Racer\"\nfor 1 time",
+	"desc_en": "Get \"King Racer\"|for 1 time",
 	"mission_type": "EASY",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -559,7 +559,7 @@
 {
 	"id": 32,
 	"desc": "在任意关卡中胜利5次",
-	"desc_en": "Win 5 times\nin any Chapter",
+	"desc_en": "Win 5 times|in any Chapter",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -577,7 +577,7 @@
 {
 	"id": 33,
 	"desc": "在追逐赛中胜利3次",
-	"desc_en": "Win 3 times\nin Pursuit Race",
+	"desc_en": "Win 3 times|in Pursuit Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -595,7 +595,7 @@
 {
 	"id": 34,
 	"desc": "在计时赛中胜利3次",
-	"desc_en": "Win 3 times\nin Timer Race",
+	"desc_en": "Win 3 times|in Timer Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -613,7 +613,7 @@
 {
 	"id": 35,
 	"desc": "在躲避赛中胜利2次",
-	"desc_en": "Win 2 times\nin Evasion Race",
+	"desc_en": "Win 2 times|in Evasion Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -631,7 +631,7 @@
 {
 	"id": 36,
 	"desc": "在漂移赛中胜利3次",
-	"desc_en": "Win 3 times\nin Drifting Race",
+	"desc_en": "Win 3 times|in Drifting Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -649,7 +649,7 @@
 {
 	"id": 37,
 	"desc": "在摧毁赛中胜利2次",
-	"desc_en": "Win 2 times\nin Destroyer Race",
+	"desc_en": "Win 2 times|in Destroyer Race",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -685,7 +685,7 @@
 {
 	"id": 39,
 	"desc": "使用无敌狂飙累计冲刺4000米",
-	"desc_en": "Usage of Speeding\nsprints 4000m",
+	"desc_en": "Usage of Speeding|sprints 4000m",
 	"mission_type": "NORMAL",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -739,7 +739,7 @@
 {
 	"id": 42,
 	"desc": "累计得到3次车神称号",
-	"desc_en": "Get \"King Racer\"\nfor 3 times",
+	"desc_en": "Get \"King Racer\"|for 3 times",
 	"mission_type": "NORMAL",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -757,7 +757,7 @@
 {
 	"id": 43,
 	"desc": "使用量子幻影超车10次",
-	"desc_en": "Use Illusion Overtake\nfor 10 times",
+	"desc_en": "Use Illusion Overtake|for 10 times",
 	"mission_type": "NORMAL",
 	"condition_type": "OVERTAKE_CARS_IN_SHADOW",
 	"used_car_id": 0,
@@ -865,7 +865,7 @@
 {
 	"id": 49,
 	"desc": "在任意关卡中胜利10次",
-	"desc_en": "Win 10 times\nin any Chapter",
+	"desc_en": "Win 10 times|in any Chapter",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -883,7 +883,7 @@
 {
 	"id": 50,
 	"desc": "在追逐赛中胜利5次",
-	"desc_en": "Win 5 times\nin Pursuit Race",
+	"desc_en": "Win 5 times|in Pursuit Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -901,7 +901,7 @@
 {
 	"id": 51,
 	"desc": "在计时赛中胜利5次",
-	"desc_en": "Win 5 times\nin Timer Race",
+	"desc_en": "Win 5 times|in Timer Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -919,7 +919,7 @@
 {
 	"id": 52,
 	"desc": "在躲避赛中胜利3次",
-	"desc_en": "Win 3 times\nin Evasion Race",
+	"desc_en": "Win 3 times|in Evasion Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -937,7 +937,7 @@
 {
 	"id": 53,
 	"desc": "在漂移赛中胜利3次",
-	"desc_en": "Win 3 times\nin Drifting Race",
+	"desc_en": "Win 3 times|in Drifting Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -955,7 +955,7 @@
 {
 	"id": 54,
 	"desc": "在摧毁赛中胜利3次",
-	"desc_en": "Win 3 times\nin Destroyer Race",
+	"desc_en": "Win 3 times|in Destroyer Race",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -991,7 +991,7 @@
 {
 	"id": 56,
 	"desc": "使用无敌狂飙累计冲刺10000米",
-	"desc_en": "Usage of Speeding\nsprints 10000m",
+	"desc_en": "Usage of Speeding|sprints 10000m",
 	"mission_type": "HARD",
 	"condition_type": "NITRO_DISTANCE",
 	"used_car_id": 0,
@@ -1045,7 +1045,7 @@
 {
 	"id": 59,
 	"desc": "累计得到5次车神称号",
-	"desc_en": "Get \"King Racer\"\nfor 5 times",
+	"desc_en": "Get \"King Racer\"|for 5 times",
 	"mission_type": "HARD",
 	"condition_type": "CLEARS",
 	"used_car_id": 0,
@@ -1063,7 +1063,7 @@
 {
 	"id": 60,
 	"desc": "使用量子幻影超车50次",
-	"desc_en": "Use Illusion Overtake\nfor 50 times",
+	"desc_en": "Use Illusion Overtake|for 50 times",
 	"mission_type": "HARD",
 	"condition_type": "OVERTAKE_CARS_IN_SHADOW",
 	"used_car_id": 0,
@@ -1081,7 +1081,7 @@
 {
 	"id": 61,
 	"desc": "使用追踪飞弹摧毁100辆车",
-	"desc_en": "Use Missile to\ndestroy 100 Cars",
+	"desc_en": "Use Missile to|destroy 100 Cars",
 	"mission_type": "HARD",
 	"condition_type": "DISTROYED_CARS_BY_MISSILE",
 	"used_car_id": 0,
@@ -1099,7 +1099,7 @@
 {
 	"id": 62,
 	"desc": "[限时任务]完成20个粉红猫的任务",
-	"desc_en": "[Time Limited] Complete\n20 Pinky's Quest",
+	"desc_en": "[Time Limited] Complete|20 Pinky's Quest",
 	"mission_type": "WEEKLY",
 	"condition_type": "CLEAR_ALL_MISSION",
 	"used_car_id": 0,
