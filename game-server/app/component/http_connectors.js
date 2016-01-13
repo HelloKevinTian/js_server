@@ -149,10 +149,24 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
             'Content-Type': 'image/png'
         });
         return res.end(img, 'binary');
-    } else if (url == "/pay_callback") {
-        return res.end("success", 'utf-8');
+    } else if (url == "/pay_callback") { //苹果支付回调
+        //Redis set {Amount,Extraparam1,Time,Sign,RoleID,Gold,MerchantRef,ZoneID,pay_Type}
+        if (data && data.Extraparam1) {
+            redis_pools.execute('pool_1', function(client, release) {
+                client.hset('h_apple_iap', data.Extraparam1.toString(), JSON.stringify(data), function(err, reply) {
+                    if (err) {
+                        http_logger.debug('apple iap callback error: ' + err);
+                        return res.end("fail", 'utf-8');
+                    }
+                    release();
+                    return res.end("success", 'utf-8');
+                });
+            });
+        } else {
+            return res.end("fail", 'utf-8');
+        }
     } else if (url == "/video_ad_reward") { //看完视频广告给奖励
-        //TODO redis set {orderid,app_id,time,idn,roleID,zoneID,item,quantity,extraParams,sign}
+        //Redis set {orderid,app_id,time,idn,roleID,zoneID,item,quantity,extraParams,sign}
         if (data && data.idn) {
             redis_pools.execute('pool_1', function(client, release) {
                 client.hset('h_vedio_ad_reward', data.idn.toString(), JSON.stringify(data), function(err, reply) {
