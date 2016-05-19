@@ -2,13 +2,14 @@
     "title": "",
     "abstract": "",
     "content": "",
-    "url1":"http://211.152.2.49:20002/announcement_103",
-    "url1_en":"http://211.152.2.49:20002/announcement_103",
-    "url2":"http://211.152.2.49:20002/rewardlist_seoul_230",
-    "url3":"http://211.152.2.49:20002/reward_vs_weekly",
-    "url3_en":"http://211.152.2.49:20002/reward_vs_weekly",
-    "url4":"http://211.152.2.49:20002/index_mm",
+    "url1":"http://107.167.183.235:20002/announcement_gv_120",
+    "url1_en":"http://107.167.183.235:20002/announcement_gv_120_en",
+    "url2":"",
+    "url3":"http://107.167.183.235:20002/reward_vs_weekly_wanwan_110",
+    "url3_en":"http://107.167.183.235:20002/reward_vs_weekly_gv_110_en",
+    "url4":"",
     "update":"false",
     "force_update":"false",
-    "update_url":"http://sxupdate.racegame.appget.cn/updateTest.apk"
+    "update_url":"http://sxupdate.racegame.appget.cn/updateTest.apk",
+    "facebook_btn": 0
 }
