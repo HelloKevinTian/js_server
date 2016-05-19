@@ -21,6 +21,15 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_VEDIO_AD_REWARD, function(msg, sessi
                 result: JSON.parse(reply),
                 time: Math.floor(Date.now() / 1000)
             });
+
+            redis_pools.execute('pool_1', function(client1, release1) {
+                client1.hdel('h_vedio_ad_reward', idn, function(err, reply1) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    release1();
+                });
+            });
         });
     });
 });
