@@ -135,9 +135,11 @@ http_connectors.prototype.parsePost = function(req, res, cb) {
 
 http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
     if (url == "/status") {
+        var pool_info = redis_pools.info();
         var result = {
             code: 200,
-            status: "ok"
+            status: "ok",
+            redis: pool_info
         }
         return res.end(JSON.stringify(result) + '\n', 'utf8');
     } else if (url == "/favicon.ico") {
