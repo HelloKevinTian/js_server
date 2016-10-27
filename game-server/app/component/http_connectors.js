@@ -221,19 +221,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         return res.end("success", 'utf-8');
     }
     var msg = JSON.parse(data.msg);
-    //  version mapping
-    if (msg.version) {
-        if ("1.2.9" == msg.version) {
-            msg.version = "1.2.8";
-        } else if ("1.0.0" == msg.version || "0.9.0" == msg.version) {
-            //  version mapping for wandoujia
-            msg.version = "2.2.0";
-        } else if ("1.1.0" == msg.version) { //add pvp
-            msg.version = "2.3.0";
-        } else if ("1.2.0" == msg.version) { //add english version
-            msg.version = "2.4.0";
-        }
-    }
+
     var statistics_wrapper = pomelo.app.get('statistics_wrapper');
     statistics_wrapper.requestsInAllInc();
     statistics_wrapper.requestsPerDayInc();

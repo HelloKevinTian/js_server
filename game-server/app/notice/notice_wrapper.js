@@ -9,16 +9,6 @@ var notice_wrapper = function() {
 };
 
 notice_wrapper.prototype.init = function(notice_template){
-    redis_notice_wrapper.init_notice('template','2.4.0',notice_template);
-    redis_notice_wrapper.init_notice('template','2.3.0',notice_template);
-    redis_notice_wrapper.init_notice('template','2.2.0',notice_template);
-    redis_notice_wrapper.init_notice('template','2.1.0',notice_template);
-    redis_notice_wrapper.init_notice('template','2.0.0',notice_template);
-    redis_notice_wrapper.init_notice('template','1.3.0',notice_template);
-    redis_notice_wrapper.init_notice('template','1.2.8',notice_template);
-    redis_notice_wrapper.init_notice('template','1.2.6',notice_template);
-    redis_notice_wrapper.init_notice('template','1.2.4',notice_template);
-    redis_notice_wrapper.init_notice('template','1.2.2',notice_template);
     redis_notice_wrapper.init_notice('template','1.2.0',notice_template);
 };
 
