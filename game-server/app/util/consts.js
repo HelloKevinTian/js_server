@@ -37,6 +37,7 @@ module.exports = {
         TYPE_ENTITY_GACHA_SET_PHONE_NUM: 36,
         TYPE_GET_VEDIO_AD_REWARD: 37,
         TYPE_GET_APPLE_IAP_INFO: 38,
+        TYPE_ANQU_LOGIN_VERIFY: 39,
     },
     TYPE_ACTIVITY: {
         TYPE_DAILY_SIGN: 1, //// 每日签到

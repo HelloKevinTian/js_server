@@ -13,6 +13,7 @@ var log_json = require('../../config/log.json');
 log4js.configure(log_json);
 var http_logger = log4js.getLogger('http-logger');
 var redis_pools = require("../nosql/redis_pools");
+var utils = require('../util/util');
 
 module.exports = function(app, opts) {
     return new http_connectors(app, opts);
@@ -134,6 +135,12 @@ http_connectors.prototype.parsePost = function(req, res, cb) {
 };
 
 http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
+
+    if (url !== '/favicon.ico') {
+        console.log('url data:', url, data);
+    }
+
+
     if (url == "/status") {
         var pool_info = redis_pools.info();
         var result = {
@@ -166,6 +173,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
                     return res.end("success", 'utf-8');
                 });
             });
+            return;
         } else {
             return res.end("fail", 'utf-8');
         }
@@ -182,10 +190,33 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
                     return res.end("success", 'utf-8');
                 });
             });
+            return;
         } else {
             return res.end("fail", 'utf-8');
         }
+    } else if (url == '/anqu_callback') { //安趣回调
+
+        var appId = 'G100369';
+        var appsecret = '50a93cbd4d207fcb4c4df93710ff3d30';
+
+        if (data && data.uid && data.cporder && data.cpappid && data.money && data.order && data.sign) {
+            var str = utils.md5(data.uid + data.cporder + data.money + data.order + appsecret);
+
+            if (appId !== data.cpappid) {
+                return res.end('fail', 'utf-8');;
+            }
+            if (data.sign !== str) {
+                return res.end('success', 'utf-8');;
+            } else {
+                return res.end('fail', 'utf-8');;
+            }
+        } else {
+            return res.end('fail', 'utf-8');
+        }
+
     }
+
+
     if (!data.msg) {
         return res.end("success", 'utf-8');
     }

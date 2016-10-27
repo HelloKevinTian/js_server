@@ -1,5 +1,8 @@
 /**
- * Created by Kevin on 2016/1/13.
+ * @ Author Kevin
+ * @ Email  tianwen@chukong-inc.com
+ * @ 2016/1/13
+ * @ 苹果支付验证
  */
 var handlerMgr = require("./../handlerMgr");
 var consts = require("../../../util/consts");

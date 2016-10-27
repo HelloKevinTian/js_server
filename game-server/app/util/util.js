@@ -1,6 +1,8 @@
 /**
  * Created by King Lee on 2014/10/17.
  */
+var request = require('request');
+
 var utils = module.exports;
 
 //  current is the x week
@@ -45,4 +47,21 @@ utils.formatDate = function(date_str) {
     var month = date.getMonth() + 1;
     var day = date.getDate();
     return year.toString() + "年" + month.toString() + "月" + day.toString() + "日";
+};
+
+utils.rr = function(url, form, callback) {
+    request.post({
+        'url': url,
+        'form': form,
+        'json': true
+    }, function(err, result) {
+        callback(err, result);
+    });
+}
+
+utils.md5 = function(str) {
+    var crypto = require('crypto');
+    var md5 = crypto.createHash('md5');
+    md5.update(str, 'utf8'); //默认是binary,可选：ascii  utf8
+    return md5.digest('hex'); // The encoding can be 'hex', 'binary' or 'base64'
 };
