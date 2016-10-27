@@ -11,6 +11,7 @@
         "nodemailer":"0.7.0",
 		"log4js":"0.6.14",
         "getmac ":"1.0.6",
+        "request": "2.33.0",
         "nodejieba ":"0.2.4"
     }
 }
