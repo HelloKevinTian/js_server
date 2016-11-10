@@ -46,62 +46,27 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_RANDOM_PRIZE_THE_SECOND_PHASE, function(
                 free_flag = 0;
             }
 
-            //1.0.3版本加入实物抽奖
-            var versionArr = version.split('.');
-            var totalVersion = Number(versionArr[0]) * 100 + Number(versionArr[1]) * 10 + Number(versionArr[2]);
 
-            if (totalVersion == 222) {
-                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.2")
-            } else if (totalVersion >= 223) {
-                get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,"1.0.3");
-            } else { //1.0.2版本以前的抽奖规则
-                for (var i = 0; i < count; ++i) {
-                    var gacha_array = new Array();
-                    for (var j = 0; j < activity.gacha_random_num; ++j) {
-                        var prize = random_prize_the_second_phase_wrapper.random();
-                        if (!prize) {
-                            continue;
-                        }
-                        gacha_array.push(prize);
-                    }
-                    for (var j = 0; j < activity.gacha2_random_num; ++j) {
-                        var prize = random_prize_the_second_phase_wrapper.random2();
-                        if (!prize) {
-                            continue;
-                        }
-                        gacha_array.push(prize);
-                    }
-                    gacha_result.push(gacha_array);
-                }
-                random_prize_the_second_phase_wrapper.set(device_guid, free_flag);
-                next(null, {
-                    code: 0,
-                    msg_id: msg.msg_id,
-                    flowid: msg.flowid,
-                    time: Math.floor(Date.now() / 1000),
-                    gacha_result: gacha_result,
-                    use_ticket: msg.use_ticket
-                });
-            }
+            get_prize(device_guid, count_index, count, random_prize_the_second_phase_wrapper, activity, gacha_result, free_flag, msg, next);
 
         });
     });
 });
 
-function get_prize(device_guid,count_index,count,random_prize_the_second_phase_wrapper,activity,gacha_result,free_flag,msg,next,version) {
+function get_prize(device_guid, count_index, count, random_prize_the_second_phase_wrapper, activity, gacha_result, free_flag, msg, next) {
     specialPrizeFlag.get(device_guid, function(replyData) {
         if (null != replyData) {
             count_index = JSON.parse(replyData)
         }
 
-        entity_gacha_info.getall(function(reply){
+        entity_gacha_info.getall(function(reply) {
             var gacha_info;
             if (reply != null) {
                 gacha_info = reply;
             }
 
-            var entity_prize_has_win;  //连抽中已经获得一次实物奖品的标识，不能获得更多次
-            if (count > 1) {//连抽
+            var entity_prize_has_win; //连抽中已经获得一次实物奖品的标识，不能获得更多次
+            if (count > 1) { //连抽
                 entity_prize_has_win = 0;
             }
 
@@ -132,19 +97,15 @@ function get_prize(device_guid,count_index,count,random_prize_the_second_phase_w
                     }
                     for (var j = 0; j < activity.gacha_random_num; ++j) {
                         var prize;
-                        if (version === "1.0.2") {
-                            prize = random_prize_the_second_phase_wrapper.random4();
-                        } else if (version === "1.0.3") {
-                            if (entity_prize_has_win != null) {
-                                if (entity_prize_has_win === 0) {
-                                    prize = get_entity_prize(activity,device_guid,random_prize_the_second_phase_wrapper,gacha_info);
-                                    entity_prize_has_win = 1;
-                                } else {
-                                    prize = random_prize_the_second_phase_wrapper.random4();
-                                }
+                        if (entity_prize_has_win != null) {
+                            if (entity_prize_has_win === 0) {
+                                prize = get_entity_prize(activity, device_guid, random_prize_the_second_phase_wrapper, gacha_info);
+                                entity_prize_has_win = 1;
                             } else {
-                                prize = get_entity_prize(activity,device_guid,random_prize_the_second_phase_wrapper,gacha_info);
+                                prize = random_prize_the_second_phase_wrapper.random4();
                             }
+                        } else {
+                            prize = get_entity_prize(activity, device_guid, random_prize_the_second_phase_wrapper, gacha_info);
                         }
 
                         if (!prize) {
@@ -180,7 +141,7 @@ function get_prize(device_guid,count_index,count,random_prize_the_second_phase_w
     });
 }
 
-function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wrapper,gacha_info){
+function get_entity_prize(activity, device_guid, random_prize_the_second_phase_wrapper, gacha_info) {
     var entity_startTime = activity.entity_startTime;
     var entity_endTime = activity.entity_endTime;
     var entity_unit_type = activity.entity_unit_type;
@@ -205,7 +166,7 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
         //跑马取数据时 hvals  arr.reverse()
         var entity_prize_win_flag = false; //抽中实物奖励标识
 
-        for (var i = 0;i < entity_unit_type.length;i++) {
+        for (var i = 0; i < entity_unit_type.length; i++) {
             var item_type = entity_unit_type[i]; //服务器特有的实物类型唯一标识
             var unit_time = entity_unit_time[i]; //m小时产n个奖品的m值
             var unit_num = entity_unit_num[i]; //m小时产n个奖品的n值
@@ -231,15 +192,15 @@ function get_entity_prize(activity,device_guid,random_prize_the_second_phase_wra
                 if (random_val < get_weight) {
                     //抽中了！！！
                     entity_prize_win_flag = true;
-                    entity_gacha_info.set(entity_startTime + "@" + item_type.toString(),++used_prize_num);  //更新redis，此奖品已被抽中的次数存库
+                    entity_gacha_info.set(entity_startTime + "@" + item_type.toString(), ++used_prize_num); //更新redis，此奖品已被抽中的次数存库
 
                     var year = now_date.getFullYear();
                     var month = now_date.getMonth() + 1;
                     var day = now_date.getDate();
                     var date_str = year.toString() + "/" + month.toString() + "/" + day.toString();
 
-                    console.log(device_guid,now_date,item_type);
-                    entity_gacha_winner.set(device_guid.toString() + "@" + now_date.toString(),item_type.toString() + "@" + date_str);     //哪个人抽到哪个奖品存库
+                    console.log(device_guid, now_date, item_type);
+                    entity_gacha_winner.set(device_guid.toString() + "@" + now_date.toString(), item_type.toString() + "@" + date_str); //哪个人抽到哪个奖品存库
                     //log
                     datelogger.debug("winner get prize! :" + device_guid.toString() + "@" + now_date.toString() + "@" + item_type.toString());
                     if (item_type === consts.TYPE_ENTITY_PRIZE.TYPE_PHONE_CHARGE) {
