@@ -26,16 +26,16 @@ var mission_string_2_type = function(mission_string){
 //  for protocol adaptive,do not change
 //  for mission
 var cur_version_major = 1;
-var cur_version_minor = 2;
-var cur_version_fix = 8;
+var cur_version_minor = 0;
+var cur_version_fix = 0;
 
 //  for week mission
-var cur_version_major_4_week_mission = 2;
-var cur_version_minor_4_week_mission = 2;
+var cur_version_major_4_week_mission = 1;
+var cur_version_minor_4_week_mission = 0;
 var cur_version_fix_4_week_mission = 0;
 
-var cur_version_major_4_sign_in = 2;
-var cur_version_minor_4_sign_in = 2;
+var cur_version_major_4_sign_in = 1;
+var cur_version_minor_4_sign_in = 0;
 var cur_version_fix_4_sign_in = 0;
 
 var get_version_major = function(version){
