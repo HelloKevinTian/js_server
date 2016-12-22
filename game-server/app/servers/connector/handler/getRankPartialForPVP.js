@@ -21,6 +21,7 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
         for (var v in activity_json) {
             if (consts.TYPE_ACTIVITY.TYPE_PVP == parseInt(activity_json[v].type)) {
                 activity = activity_json[v];
+                break;
             }
         }
         var pvp_switch = activity.switch;
@@ -121,9 +122,6 @@ handlerMgr.handler(consts.TYPE_MSG.TYPE_GET_RANK_PARTIAL_FOR_PVP, function (msg,
             function (err, result) {
                 if (err) {
                     console.error(err);
-                }
-                if (0) {
-                    console.log("%j", result[1]);
                 }
                 var rank_info_array_weekly = result[0];
                 var rank_info_array = result[1];

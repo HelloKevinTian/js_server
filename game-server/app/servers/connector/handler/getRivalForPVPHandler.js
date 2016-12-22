@@ -94,8 +94,8 @@ var get_robot_rival_info = function(strength_min, strength_max, player_info_arra
 
     copy_rival_info(player_info_somebody,random_val);
 
-    //2.6.0版本加入随机到boss的功能
-    if (version === "2.6.0" && !pvp_has_boss && (Math.random() >= consts.TYPE_PVP.PVP_BOSS_WEIGHT)) {
+    //随机到boss的功能
+    if (!pvp_has_boss && (Math.random() >= consts.TYPE_PVP.PVP_BOSS_WEIGHT)) {
         player_info_somebody.driver = consts.TYPE_PVP.PVP_BOSS_RACER_ID;
         pvp_has_boss = true;
     }

@@ -136,9 +136,9 @@ http_connectors.prototype.parsePost = function(req, res, cb) {
 
 http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
 
-    if (url !== '/favicon.ico') {
-        console.log('url data:', url, data);
-    }
+    // if (url !== '/favicon.ico') {
+    //     console.log('url data:', url, data);
+    // }
 
 
     if (url == "/status") {
@@ -158,9 +158,9 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
             'Content-Type': 'image/png'
         });
         return res.end(img, 'binary');
-    } else if (url == "/pay_callback") { //安卓支付回调
+    } else if (url == "/pay_callback") { //GameView安卓支付回调
         return res.end("success", 'utf-8');
-    } else if (url == "/ios_pay_callback") { //苹果支付回调
+    } else if (url == "/ios_pay_callback") { //GameView苹果支付回调
         //Redis set {Amount,Extraparam1,Time,Sign,RoleID,Gold,MerchantRef,ZoneID,pay_Type}
         if (data && data.Extraparam1) {
             redis_pools.execute('pool_1', function(client, release) {
@@ -177,7 +177,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         } else {
             return res.end("fail", 'utf-8');
         }
-    } else if (url == "/video_ad_reward") { //看完视频广告给奖励
+    } else if (url == "/video_ad_reward") { //GameView看完视频广告给奖励
         //Redis set {orderid,app_id,time,idn,roleID,zoneID,item,quantity,extraParams,sign}
         if (data && data.idn) {
             redis_pools.execute('pool_1', function(client, release) {
@@ -194,7 +194,7 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         } else {
             return res.end("fail", 'utf-8');
         }
-    } else if (url == '/anqu_callback') { //安趣回调
+    } else if (url == '/anqu_callback') { //安趣支付回调
 
         var appId = 'G100369';
         var appsecret = '50a93cbd4d207fcb4c4df93710ff3d30';
@@ -203,12 +203,12 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
             var str = utils.md5(data.uid + data.cporder + data.money + data.order + appsecret);
 
             if (appId !== data.cpappid) {
-                return res.end('fail', 'utf-8');;
+                return res.end('fail', 'utf-8');
             }
             if (data.sign !== str) {
-                return res.end('success', 'utf-8');;
+                return res.end('success', 'utf-8');
             } else {
-                return res.end('fail', 'utf-8');;
+                return res.end('fail', 'utf-8');
             }
         } else {
             return res.end('fail', 'utf-8');
