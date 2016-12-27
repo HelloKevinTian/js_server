@@ -196,23 +196,26 @@ http_connectors.prototype.dispatchMessage = function(data, url, req, res) {
         }
     } else if (url == '/anqu_callback') { //安趣支付回调
 
-        var appId = 'G100369';
-        var appsecret = '50a93cbd4d207fcb4c4df93710ff3d30';
+        res.end('success', 'utf-8');
+        return;
 
-        if (data && data.uid && data.cporder && data.cpappid && data.money && data.order && data.sign) {
-            var str = utils.md5(data.uid + data.cporder + data.money + data.order + appsecret);
+        // var appId = 'G100369';
+        // var appsecret = '50a93cbd4d207fcb4c4df93710ff3d30';
 
-            if (appId !== data.cpappid) {
-                return res.end('fail', 'utf-8');
-            }
-            if (data.sign !== str) {
-                return res.end('success', 'utf-8');
-            } else {
-                return res.end('fail', 'utf-8');
-            }
-        } else {
-            return res.end('fail', 'utf-8');
-        }
+        // if (data && data.uid && data.cporder && data.cpappid && data.money && data.order && data.sign) {
+        //     var str = utils.md5(data.uid + data.cporder + data.money + data.order + appsecret);
+
+        //     if (appId !== data.cpappid) {
+        //         return res.end('fail', 'utf-8');
+        //     }
+        //     if (data.sign !== str) {
+        //         return res.end('success', 'utf-8');
+        //     } else {
+        //         return res.end('fail', 'utf-8');
+        //     }
+        // } else {
+        //     return res.end('fail', 'utf-8');
+        // }
 
     }
 
