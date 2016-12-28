@@ -15,6 +15,11 @@ var dump_load_wrapper = require('./app/dump_load/dump_load_wrapper');
 var sign_in_wrapper = require('./app/sign_in/sign_in_wrapper');
 var mask_word_wrapper = require('./app/mask_word/mask_word_wrapper');
 
+var log4js = require('log4js');
+var log_json = require('./config/log.json');
+log4js.configure(log_json);
+var errLogger = log4js.getLogger('error');
+
 /**
  * Init app for client.
  */
@@ -22,84 +27,89 @@ var app = pomelo.createApp();
 app.set('name', 'srv');
 
 app.configure('production|development', 'connector', function() {
-    app.load(http_connectors, {host:app.get('curServer').host,port: app.get('curServer').httpClientPort,cluster:app.get('curServer').cluster});
+    app.load(http_connectors, {
+        host: app.get('curServer').host,
+        port: app.get('curServer').httpClientPort,
+        cluster: app.get('curServer').cluster
+    });
 });
 
 // app configuration
-app.configure('production|development', 'connector', function(){
-  app.set('connectorConfig',
-    {
-      connector : pomelo.connectors.hybridconnector,
-      heartbeat : 3,
-      useDict : true,
-      useProtobuf : true
+app.configure('production|development', 'connector', function() {
+    app.set('connectorConfig', {
+        connector: pomelo.connectors.hybridconnector,
+        heartbeat: 3,
+        useDict: true,
+        useProtobuf: true
     });
     app.loadConfig('redis', app.getBase() + '/config/redis.json');
     console.log("config load for redis  %s", app.getBase() + '/config/redis.json');
     require('./app/nosql/redis_pools').configure(app.get('redis'));
 
-/*
-    //  create http server
-    var http = new httpServer(app.get('curServer').host,app.get('curServer').httpClientPort);
-    http.createHttpServer();
-    app.set('httpServer',http);
-*/
+    /*
+        //  create http server
+        var http = new httpServer(app.get('curServer').host,app.get('curServer').httpClientPort);
+        http.createHttpServer();
+        app.set('httpServer',http);
+    */
     //  for mail handler
     var __mail_wrapper = new mail_wrapper(require('./config/mail'));
-    app.set('mail_wrapper',__mail_wrapper);
+    app.set('mail_wrapper', __mail_wrapper);
 
     //  for activity handler
     var __activity_wrapper = new activity_wrapper();
-    app.set('activity_wrapper',__activity_wrapper);
+    app.set('activity_wrapper', __activity_wrapper);
 
     //  for notice handler
     var __notice_wrapper = new notice_wrapper();
-    app.set('notice_wrapper',__notice_wrapper);
+    app.set('notice_wrapper', __notice_wrapper);
 
     //  for statistics handler
     var __statistics_wrapper = new statistics_wrapper();
-    app.set('statistics_wrapper',__statistics_wrapper);
+    app.set('statistics_wrapper', __statistics_wrapper);
 
     //  for rank handler
     var __rank_wrapper = new rank_wrapper();
-    app.set('rank_wrapper',__rank_wrapper);
+    app.set('rank_wrapper', __rank_wrapper);
 
     //  for rank running man handler
     var __rank_running_man_wrapper = new rank_running_man_wrapper();
-    app.set('rank_running_man_wrapper',__rank_running_man_wrapper);
+    app.set('rank_running_man_wrapper', __rank_running_man_wrapper);
 
     //  for rank pvp handler
     var __rank_pvp_wrapper = new rank_pvp_wrapper();
-    app.set('rank_pvp_wrapper',__rank_pvp_wrapper);
+    app.set('rank_pvp_wrapper', __rank_pvp_wrapper);
 
     //  for random prize
     var __random_prize_wrapper = new random_prize_wrapper();
-    app.set('random_prize_wrapper',__random_prize_wrapper);
+    app.set('random_prize_wrapper', __random_prize_wrapper);
 
     //  for the second phase random prize
     var __random_prize_the_second_phase_wrapper = new random_prize_the_second_phase_wrapper();
-    app.set('random_prize_the_second_phase_wrapper',__random_prize_the_second_phase_wrapper);
+    app.set('random_prize_the_second_phase_wrapper', __random_prize_the_second_phase_wrapper);
 
     //  for the forth phase random prize
     var __random_prize_the_fourth_phase_wrapper = new random_prize_the_fourth_phase_wrapper();
-    app.set('random_prize_the_fourth_phase_wrapper',__random_prize_the_fourth_phase_wrapper);
+    app.set('random_prize_the_fourth_phase_wrapper', __random_prize_the_fourth_phase_wrapper);
 
     //  for dump load
     var __dump_load_wrapper = new dump_load_wrapper();
-    app.set('dump_load',__dump_load_wrapper);
+    app.set('dump_load', __dump_load_wrapper);
 
     //  for sign in
     var __sign_in_wrapper = new sign_in_wrapper();
-    app.set('sign_in_wrapper',__sign_in_wrapper);
+    app.set('sign_in_wrapper', __sign_in_wrapper);
 
     //  for mask word
     var __mask_word_wrapper = new mask_word_wrapper();
-    app.set('mask_word_wrapper',__mask_word_wrapper);
+    app.set('mask_word_wrapper', __mask_word_wrapper);
 });
 
 // start app
 app.start();
 
-process.on('uncaughtException', function (err) {
-  console.error(' Caught exception: ' + err.stack);
+process.on('uncaughtException', function(err) {
+    console.error(' Caught exception: ' + err.stack);
+
+    errLogger.error('uncaughtException: ' + err.stack);
 });
